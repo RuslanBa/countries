@@ -9,126 +9,170 @@
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f5f1ea; --panel:#fffdf9; --ink:#1d2321; --muted:#6b706c; --line:#e3dccf;
-  --sea:#e9e3d8; --grat:#ddd5c7; --nodata:#d9d4cc; --accent:#0f766e; --accent-ink:#ffffff;
-  --c0:#c4553a; --c1:#e8a75b; --c2:#efe3b8; --c3:#69b3a2; --c4:#0b5d57;
-  --stroke:#fffdf9; --shadow:0 10px 30px rgba(40,30,10,.12);
-  --r:14px;
+  --bg:#f4f6f8; --panel:#ffffff; --ink:#18202a; --muted:#66707c; --line:#e2e7ec;
+  --sea:#bfe1f6; --grat:#a9d3ee; --nodata:#c9c6c0; --accent:#0d8a6a; --accent-ink:#ffffff;
+  --c0:#e0403a; --c1:#f5933a; --c2:#f7d548; --c3:#86cc5f; --c4:#13985a;
+  --disputed:#ffffff; --disputed-stroke:#7d8791;
+  --stroke:#ffffff; --shadow:0 10px 30px rgba(20,40,60,.16); --r:14px;
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#121615; --panel:#1a201e; --ink:#ecebe6; --muted:#9aa19c; --line:#2b3330;
-    --sea:#161c1a; --grat:#222a27; --nodata:#2d3431; --accent:#2dd4bf; --accent-ink:#06231f;
-    --c0:#b4472f; --c1:#c9843f; --c2:#8f8a62; --c3:#3f9c89; --c4:#5eead4;
-    --stroke:#121615; --shadow:0 10px 30px rgba(0,0,0,.45);
+    --bg:#0f1419; --panel:#182029; --ink:#e8edf2; --muted:#94a0ad; --line:#2a3440;
+    --sea:#0e2c42; --grat:#163a54; --nodata:#4a525b; --accent:#34d399; --accent-ink:#06231a;
+    --c0:#ef4a40; --c1:#f79a3e; --c2:#f2d34a; --c3:#7fcf58; --c4:#1fae66;
+    --disputed:#f4f6f8; --disputed-stroke:#9aa5b1;
+    --stroke:#0e2c42; --shadow:0 10px 30px rgba(0,0,0,.5);
   }
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
-button{font:inherit;color:inherit}
-.wrap{max-width:1480px;margin:0 auto;padding:18px 20px 28px}
-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-h1{font-family:Unbounded,"Golos Text",sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,40px);letter-spacing:-.02em;margin:0;line-height:1.05}
-.sub{color:var(--muted);margin:6px 0 0;font-size:15px;max-width:640px}
+button,select{font:inherit;color:inherit}
+.wrap{max-width:1600px;margin:0 auto;padding:12px 16px 14px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.ttl{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;min-width:0}
+h1{font-family:Unbounded,"Golos Text",sans-serif;font-weight:700;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;margin:0;line-height:1.1}
+.sub{color:var(--muted);margin:0;font-size:14px}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.how{border:0;background:none;color:var(--accent);font-weight:600;font-size:14px;cursor:pointer;padding:6px 4px;text-decoration:underline;text-underline-offset:3px}
 .lang{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
-.lang button{border:0;background:none;padding:6px 12px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted);transition:background .2s,color .2s}
+.lang button{border:0;background:none;padding:5px 11px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted);transition:background .2s,color .2s}
 .lang button.on{background:var(--ink);color:var(--bg)}
-.grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:16px;align-items:start}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px}
-.panel h2{font-family:Unbounded,sans-serif;font-size:14px;font-weight:500;margin:0 0 4px;letter-spacing:.01em}
-.hint{color:var(--muted);font-size:13px;margin:0 0 12px}
-.presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-.presets button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 11px;font-size:12.5px;cursor:pointer;transition:all .2s}
+.grid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:14px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.panel h2{font-family:Unbounded,sans-serif;font-size:13px;font-weight:500;margin:0 0 2px}
+.hint{color:var(--muted);font-size:12px;margin:0 0 8px}
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.presets button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:3px 9px;font-size:12px;cursor:pointer;transition:all .2s}
 .presets button:hover{border-color:var(--accent);color:var(--accent)}
 .presets button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.f{padding:9px 0;border-top:1px solid var(--line)}
-.f:first-of-type{border-top:0}
-.f-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.f-name{font-weight:600;font-size:14.5px}
-.f-val{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);white-space:nowrap}
-.f-val b{color:var(--ink);font-size:14px}
-.f-sub{font-size:12px;color:var(--muted);margin:1px 0 6px}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;cursor:pointer;margin:0}
+.f{padding:6px 0 3px;border-top:1px solid var(--line)}
+.f-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.f-name{font-weight:600;font-size:13.5px;display:flex;align-items:center;gap:5px}
+.info{width:17px;height:17px;border-radius:50%;border:1px solid var(--line);background:none;font-size:10.5px;line-height:15px;padding:0;cursor:pointer;color:var(--muted);font-weight:700;flex:none}
+.info[aria-expanded=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.f-val{font-variant-numeric:tabular-nums;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.f-val b{color:var(--ink);font-size:13px}
+.f-sub{font-size:11.5px;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .25s ease, margin .25s}
+.f-sub.on{max-height:60px;margin:2px 0 2px}
+.f.off .f-name{color:var(--muted)}
+.f.na .f-name{color:var(--muted)}
+.cit{display:flex;align-items:center;gap:6px;margin:3px 0 1px;font-size:12px;color:var(--muted)}
+.cit select{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:3px 6px;font-size:12.5px;color:var(--ink)}
+.cit.need select{border-color:var(--c1);box-shadow:0 0 0 2px color-mix(in srgb,var(--c1) 30%,transparent)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:20px;background:transparent;cursor:pointer;margin:0;display:block}
 input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--accent) 0 var(--p,60%),var(--line) var(--p,60%) 100%)}
 input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:var(--line)}
 input[type=range]::-moz-range-progress{height:6px;border-radius:6px;background:var(--accent)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--panel);border:3px solid var(--accent);margin-top:-7px;transition:transform .15s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--panel);border:3px solid var(--accent)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--panel);border:3px solid var(--accent);margin-top:-6px;transition:transform .15s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--panel);border:3px solid var(--accent)}
 input[type=range]:active::-webkit-slider-thumb{transform:scale(1.2)}
 input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-.f.off .f-name{color:var(--muted)}
-.scale-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:2px}
+input[type=range]:disabled{opacity:.4;cursor:not-allowed}
+
 .mapbox{position:relative;background:var(--sea);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-#map{display:block;width:100%;height:auto;touch-action:none}
-.sphere{fill:var(--sea)}
+#map{display:block;width:100%;touch-action:none;cursor:grab}
+#map:active{cursor:grabbing}
 .grat{fill:none;stroke:var(--grat);stroke-width:.6;vector-effect:non-scaling-stroke}
-.country{stroke:var(--stroke);stroke-width:.6;vector-effect:non-scaling-stroke;cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .28s cubic-bezier(.2,.8,.2,1),filter .28s}
-.country.hov{transform:scale(1.035);filter:drop-shadow(0 4px 6px rgba(0,0,0,.35)) brightness(1.06);stroke:var(--ink);stroke-width:1.2}
-circle.country{stroke-width:1.2}
-circle.country.hov{transform:scale(1.7)}
+.country{stroke:var(--stroke);stroke-width:.7;vector-effect:non-scaling-stroke;cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .28s cubic-bezier(.2,.8,.2,1),filter .28s}
+.country.hov{transform:scale(1.035);filter:drop-shadow(0 4px 6px rgba(0,0,0,.35)) brightness(1.08) saturate(1.1);stroke:var(--ink);stroke-width:1.2}
 .country.sel{stroke:var(--ink);stroke-width:2;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
-.country.dim{opacity:.45}
+circle.country{stroke-width:1.3}
+circle.country.hov{transform:scale(1.6)}
+.hit{fill:transparent;cursor:pointer}
+.disputed{fill:var(--disputed);stroke:var(--disputed-stroke);stroke-width:.9;stroke-dasharray:3 2;vector-effect:non-scaling-stroke;cursor:help;transition:filter .2s}
+.disputed.hov{filter:drop-shadow(0 3px 5px rgba(0,0,0,.35))}
 .ring{fill:none;stroke:var(--ink);pointer-events:none}
+.pin{pointer-events:none}
 .pin circle.core{fill:var(--ink);stroke:var(--panel);stroke-width:1.5}
 .pin circle.halo{fill:none;stroke:var(--ink);stroke-width:1.5;opacity:.6;animation:halo 2.2s ease-out infinite}
-.pin text{font:600 11px "Golos Text",sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--panel);stroke-width:3px;pointer-events:none}
+.pin text{font:600 11px "Golos Text",sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--panel);stroke-width:3px}
 @keyframes halo{0%{r:4;opacity:.7}100%{r:16;opacity:0}}
-.tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:10px;padding:8px 11px;font-size:13px;opacity:0;transform:translateY(6px);transition:opacity .15s,transform .15s;white-space:nowrap;z-index:5}
-.tip.on{opacity:1;transform:none}
+
+.tip{position:absolute;left:0;top:0;pointer-events:none;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:10px;padding:7px 10px;font-size:13px;opacity:0;transition:opacity .15s;max-width:260px;z-index:7}
+.tip.on{opacity:1}
 .tip b{font-size:14px}
 .tip .m{font-variant-numeric:tabular-nums;color:var(--muted)}
-.legend{position:absolute;left:14px;bottom:12px;background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:11.5px;color:var(--muted)}
-.legend .bar{width:180px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--c0),var(--c1),var(--c2),var(--c3),var(--c4));margin:4px 0 3px}
+.legend{position:absolute;left:12px;bottom:12px;background:color-mix(in srgb,var(--panel) 90%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:11px;color:var(--muted);z-index:3}
+.legend .bar{width:170px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--c0),var(--c1),var(--c2),var(--c3),var(--c4));margin:4px 0 3px}
 .legend .row{display:flex;justify-content:space-between}
-.legend .nd{display:flex;align-items:center;gap:6px;margin-top:5px}
-.legend .nd i{width:12px;height:8px;border-radius:2px;background:var(--nodata);display:inline-block}
-.zoomctl{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:6px}
-.zoomctl button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-size:17px;line-height:1;box-shadow:var(--shadow)}
-.card{position:absolute;top:12px;right:12px;width:340px;max-height:calc(100% - 24px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;opacity:0;transform:translateX(24px) scale(.98);pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1);z-index:6}
+.legend .sw{display:flex;align-items:center;gap:6px;margin-top:4px}
+.legend .sw i{width:13px;height:9px;border-radius:2px;display:inline-block}
+.zoomctl{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.zoomctl button{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow)}
+
+.float{position:absolute;top:12px;right:12px;width:300px;max-height:calc(100% - 24px);overflow:auto;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);transition:opacity .35s,transform .4s cubic-bezier(.2,.8,.2,1);z-index:5}
+.top{padding:10px 12px;opacity:0;transform:translateY(-10px)}
+.top.on{opacity:1;transform:none}
+.top.hide{opacity:0;transform:translateX(20px);pointer-events:none}
+.top-h{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.top-h h2{margin:0;font-family:Unbounded,sans-serif;font-size:13px;font-weight:500}
+.chev{display:inline-block;transition:transform .25s;color:var(--muted);font-size:12px}
+.top.col .chev{transform:rotate(-90deg)}
+.top ol{list-style:none;margin:6px 0 0;padding:0;overflow:hidden;transition:max-height .35s ease;max-height:600px}
+.top.col ol{max-height:0}
+.top li{display:grid;grid-template-columns:20px 1fr 30px;align-items:center;gap:6px;padding:4px 5px;border-radius:8px;cursor:pointer;transition:background .2s;font-size:13px}
+.top li:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.top .i{font-variant-numeric:tabular-nums;color:var(--muted);font-size:11.5px}
+.top .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .nm small{display:block;height:3px;border-radius:3px;margin-top:3px;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.top .pc{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+.empty{color:var(--muted);font-size:13px;padding:6px 0}
+
+.card{width:340px;padding:14px;opacity:0;transform:translateX(24px) scale(.98);pointer-events:none;background:var(--panel)}
 .card.on{opacity:1;transform:none;pointer-events:auto}
 .card .x{position:absolute;top:8px;right:8px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);width:30px;height:30px;border-radius:8px}
 .card .x:hover{background:var(--line)}
-.card h3{font-family:Unbounded,sans-serif;font-weight:500;font-size:19px;margin:0 30px 2px 0;line-height:1.2}
-.card .flag{font-size:26px;margin-right:6px;vertical-align:-3px}
-.score{display:flex;align-items:center;gap:14px;margin:12px 0 10px}
-.donut{width:74px;height:74px;flex:none}
+.card h3{font-family:Unbounded,sans-serif;font-weight:500;font-size:18px;margin:0 30px 2px 0;line-height:1.2}
+.card .flag{font-size:24px;margin-right:6px;vertical-align:-3px}
+.score{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+.donut{width:68px;height:68px;flex:none}
 .donut text{font:700 18px Unbounded,sans-serif;fill:var(--ink)}
-.score .rk{font-size:13px;color:var(--muted)}
-.score .rk b{display:block;font-size:15px;color:var(--ink)}
-.sec{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 6px;font-weight:600}
-.fb{display:grid;grid-template-columns:1fr 120px 30px;align-items:center;gap:8px;font-size:13px;padding:3px 0}
-.fb .track{height:7px;border-radius:4px;background:var(--line);overflow:hidden}
-.fb .fill{height:100%;border-radius:4px;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
-.fb .n{font-variant-numeric:tabular-nums;text-align:right;color:var(--muted)}
-.fb.off{opacity:.45}
-.ind{font-size:12.5px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:5px 0;border-top:1px dashed var(--line)}
+.score .rk{font-size:12.5px;color:var(--muted)}
+.score .rk b{display:block;font-size:14px;color:var(--ink)}
+.sec{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:10px 0 2px;font-weight:600}
+.cap{font-size:11.5px;color:var(--muted);margin:0 0 4px}
+.acc{border-top:1px solid var(--line)}
+.acc>button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:14px 1fr 90px 26px;align-items:center;gap:7px;font-size:13px;padding:6px 0;cursor:pointer}
+.acc>button:focus-visible{outline:2px solid var(--accent);border-radius:6px}
+.acc .chev{font-size:10px}
+.acc.open .chev{transform:rotate(90deg)}
+.acc .track{height:7px;border-radius:4px;background:var(--line);overflow:hidden}
+.acc .fill{height:100%;border-radius:4px;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.acc .n{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+.acc.off>button{opacity:.5}
+.acc .body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc.open .body{max-height:420px}
+.ind{font-size:12px;display:grid;grid-template-columns:1fr auto;gap:1px 10px;padding:5px 0 5px 21px;border-top:1px dashed var(--line)}
 .ind .v{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
 .ind .meta{grid-column:1/-1;color:var(--muted);font-size:11px}
-.note{font-size:12px;color:var(--muted);background:var(--bg);border-radius:8px;padding:8px 10px;margin-top:10px}
-.below{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;margin-top:16px}
-.top ol{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 22px}
-.top li{display:grid;grid-template-columns:22px 1fr 42px;align-items:center;gap:8px;padding:6px 6px;border-radius:8px;cursor:pointer;transition:background .2s;font-size:14px}
-.top li:hover{background:var(--bg)}
-.top .i{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
-.top .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.top .nm small{display:block;height:4px;border-radius:3px;margin-top:4px;background:var(--accent);width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
-.top .pc{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
-.empty{color:var(--muted);font-size:14px;padding:10px 0}
-.about p{font-size:13px;color:var(--muted);margin:6px 0;line-height:1.45}
-.about a{color:var(--accent)}
-footer{margin-top:16px;font-size:12px;color:var(--muted);line-height:1.5}
+.ind .meta em{font-style:normal;color:var(--ink)}
+.ind.miss{color:var(--muted)}
+.note{font-size:11.5px;color:var(--muted);background:var(--bg);border-radius:8px;padding:7px 9px;margin:6px 0 4px 21px}
+
+.modal{position:fixed;inset:0;background:rgba(10,20,30,.45);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:20}
+.modal.on{opacity:1;pointer-events:auto}
+.modal .box{background:var(--panel);border-radius:18px;max-width:720px;width:100%;max-height:88vh;overflow:auto;padding:24px 26px;position:relative;box-shadow:var(--shadow);transform:translateY(16px) scale(.98);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.modal.on .box{transform:none}
+.modal h2{font-family:Unbounded,sans-serif;font-weight:500;font-size:20px;margin:0 30px 10px 0}
+.modal h3{font-size:14px;margin:16px 0 6px}
+.modal p,.modal li{font-size:14px;line-height:1.5;color:var(--ink)}
+.modal .muted{color:var(--muted)}
+.modal ul{padding-left:18px;margin:6px 0}
+.modal table{width:100%;border-collapse:collapse;font-size:13px}
+.modal td{padding:5px 6px;border-top:1px solid var(--line);vertical-align:top}
+.modal td:first-child{font-weight:600;white-space:nowrap}
+.modal a{color:var(--accent)}
+.modal .x{position:absolute;top:12px;right:12px;border:0;background:none;font-size:22px;cursor:pointer;color:var(--muted);width:34px;height:34px;border-radius:8px}
+footer{margin-top:8px;font-size:11.5px;color:var(--muted)}
 footer a{color:var(--muted)}
 .loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
 @media (max-width:980px){
   .grid{grid-template-columns:1fr}
-  .grid > .panel{order:2}
-  .below{grid-template-columns:1fr}
+  .sub{display:none}
   .card{position:fixed;top:auto;bottom:0;left:0;right:0;width:auto;max-height:70vh;border-radius:18px 18px 0 0;transform:translateY(40px)}
-  .top ol{grid-template-columns:1fr}
+  .top{position:static;width:auto;margin:8px;max-height:none}
   .legend{position:static;margin:8px;display:inline-block}
-  .legend .bar{width:140px}
   .zoomctl{display:none}
-  .grid > .panel{order:0}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}
@@ -138,53 +182,46 @@ footer a{color:var(--muted)}
 <body>
 <div class="wrap">
   <header>
-    <div>
+    <div class="ttl">
       <h1 data-i="title">Куда переехать?</h1>
       <p class="sub" data-i="subtitle"></p>
     </div>
-    <div class="lang" role="group" aria-label="Language">
-      <button data-l="en">EN</button><button data-l="ru">RU</button><button data-l="es">ES</button>
+    <div class="hdr-r">
+      <button class="how" id="howBtn" data-i="how"></button>
+      <div class="lang" role="group" aria-label="Language">
+        <button data-l="en">EN</button><button data-l="ru">RU</button><button data-l="es">ES</button>
+      </div>
     </div>
   </header>
 
   <div class="grid">
-    <aside class="panel">
+    <aside class="panel" id="side">
       <h2 data-i="whatMatters"></h2>
       <p class="hint" data-i="sliderHint"></p>
       <div class="presets" id="presets"></div>
       <div id="sliders"></div>
     </aside>
 
-    <section>
-      <div class="mapbox" id="mapbox">
-        <svg id="map" role="img" aria-label="World map"></svg>
-        <div class="loading" id="loading" data-i="loading"></div>
-        <div class="tip" id="tip"></div>
-        <div class="legend">
-          <div data-i="legendTitle"></div>
-          <div class="bar"></div>
-          <div class="row"><span data-i="legendLow"></span><span data-i="legendHigh"></span></div>
-          <div class="nd"><i></i><span data-i="noData"></span></div>
-        </div>
-        <div class="zoomctl">
-          <button id="zin" aria-label="Zoom in">+</button>
-          <button id="zout" aria-label="Zoom out">−</button>
-          <button id="zreset" aria-label="Reset">⟲</button>
-        </div>
-        <div class="card" id="card" aria-live="polite"></div>
+    <section class="mapbox" id="mapbox">
+      <svg id="map" role="img" aria-label="World map"></svg>
+      <div class="loading" id="loading" data-i="loading"></div>
+      <div class="tip" id="tip"></div>
+      <div class="float top" id="top">
+        <div class="top-h" id="topH"><h2 data-i="topTitle"></h2><span class="chev">▾</span></div>
+        <div id="topList"></div>
       </div>
-
-      <div class="below">
-        <div class="panel top">
-          <h2 data-i="topTitle"></h2>
-          <div id="top"></div>
-        </div>
-        <div class="panel about">
-          <h2 data-i="aboutTitle"></h2>
-          <p data-i="about1"></p>
-          <p data-i="about2"></p>
-          <p data-i="about3"></p>
-        </div>
+      <div class="float card" id="card" aria-live="polite"></div>
+      <div class="legend">
+        <div data-i="legendTitle"></div>
+        <div class="bar"></div>
+        <div class="row"><span data-i="legendLow"></span><span data-i="legendHigh"></span></div>
+        <div class="sw"><i style="background:var(--nodata)"></i><span data-i="noData"></span></div>
+        <div class="sw"><i style="background:var(--disputed);outline:1px dashed var(--disputed-stroke)"></i><span data-i="disputed"></span></div>
+      </div>
+      <div class="zoomctl">
+        <button id="zin" aria-label="Zoom in">+</button>
+        <button id="zout" aria-label="Zoom out">−</button>
+        <button id="zreset" aria-label="Reset">⟲</button>
       </div>
     </section>
   </div>
@@ -194,10 +231,13 @@ footer a{color:var(--muted)}
     <a href="https://data.worldbank.org" target="_blank" rel="noopener">World Bank (CC BY 4.0)</a> ·
     <a href="https://www.oecd.org/en/about/programmes/pisa.html" target="_blank" rel="noopener">OECD PISA 2025</a> ·
     <a href="https://www.indec.gob.ar" target="_blank" rel="noopener">INDEC</a> ·
-    <span data-i="geoSrc"></span> <a href="https://github.com/topojson/world-atlas" target="_blank" rel="noopener">Natural Earth / world-atlas</a>.
-    <br><span data-i="footNote"></span> <span id="gen"></span>
+    <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank" rel="noopener">Passport Index dataset</a> ·
+    <a href="https://github.com/topojson/world-atlas" target="_blank" rel="noopener">Natural Earth</a>.
+    <span data-i="footNote"></span> <span id="gen"></span>
   </footer>
 </div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="box" id="modalBox"></div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
@@ -205,37 +245,35 @@ footer a{color:var(--muted)}
 (function(){
 "use strict";
 const REDUCED = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-const ORDER = ["safety","cost","education","health","economy","jobs","laws"];
+const ORDER = ["legal","safety","cost","education","health","economy","labor","laws"];
 
 /* ---------- texts ---------- */
 const T = {
  en:{
-  title:"Where should I move?",
-  subtitle:"Set what matters to you — the map recolors every country by how well it matches your priorities.",
-  whatMatters:"What matters to you",
-  sliderHint:"Drag the sliders: 0 — ignore, 5 — very important.",
-  low:"ignore", high:"very important",
+  title:"Where should I move?", subtitle:"Set what matters to you — the map recolors every country to match.",
+  how:"How it works", whatMatters:"What matters to you", sliderHint:"0 — ignore, 5 — very important",
   presets:{equal:"Balanced",family:"Family with kids",remote:"Remote worker",career:"Career"},
-  loading:"Loading map…",
-  legendTitle:"Match with your priorities", legendLow:"weak", legendHigh:"strong", noData:"not enough data",
-  topTitle:"Best matches", aboutTitle:"How it works",
-  about1:"Each factor is built from 1–3 official indicators. Every country gets a percentile score 0–100 per indicator (100 = best in the world), then factors are averaged with the weights from your sliders.",
-  about2:"Only values from 2021 or later are used. Exchange rates are not shown: there is no reliable source to keep them current.",
-  about3:"Education quality relies on PISA 2025, so it exists only for ~85 participating countries. If it matters a lot to you, countries without PISA turn grey.",
-  match:"match", rank:"rank", of:"of", factors:"Factors", indicators:"Indicators", year:"year", source:"source",
-  noWeights:"Move at least one slider above 0.",
-  notEnough:"Not enough data for your priorities",
-  partial:"PISA covers only part of the country.",
-  sources:"Sources:", geoSrc:"Borders:",
-  footNote:"Prototype v0.1. Values not older than 2021. Not financial or migration advice.",
-  generated:"Data built:",
+  loading:"Loading map…", legendTitle:"Match with your priorities", legendLow:"weak", legendHigh:"strong",
+  noData:"not enough data", disputed:"disputed territory", disputedT:"Disputed territory",
+  topTitle:"Best matches",
+  match:"match", rank:"rank", of:"of", factors:"Factors",
+  factorCap:"0–100: country's position among all countries (100 = best). Click a factor to see what's inside.",
+  better:"better than {n}% of countries",
+  noWeights:"Move at least one slider above 0.", notEnough:"Not enough data for your priorities",
+  noVal:"no data", sources:"Sources:",
+  footNote:"Prototype v0.2 · values not older than 2021 · not legal or migration advice.", generated:"Data:",
+  citizenship:"Your citizenship", choose:"— choose —", needCit:"Choose your citizenship to use this factor",
+  entry:"Entry for citizens of {c}", legalSoon:"Coming next: years to permanent residence and citizenship.",
+  visaNoData:"Visa data not loaded yet (run extra_data.py).",
+  visa:["entry not allowed","visa required","e-visa","electronic travel authorization (eTA)","visa on arrival","visa-free, under 30 days","visa-free, 30–89 days","visa-free, 90+ days","your own country"],
   f:{
+   legal:["Ease of legal entry","visa regime for your passport"],
    safety:["Safety","homicides, political stability"],
    cost:["Low cost of living","price level vs. USA"],
    education:["Education quality","PISA 2025, university enrolment"],
    health:["Healthcare","life expectancy, access to care, infant mortality"],
    economy:["Economy","GDP per capita, growth, inflation"],
-   jobs:["Ease of finding work","unemployment, insecure employment"],
+   labor:["Job market","unemployment, insecure jobs, employers' hiring plans"],
    laws:["Reliable laws","courts, property rights, corruption"]
   },
   ind:{
@@ -243,38 +281,50 @@ const T = {
    price_level_vs_usa:"Price level, % of USA", pisa:"PISA 2025, average score", tertiary_enrollment:"University enrolment (gross), %",
    life_expectancy:"Life expectancy, years", uhc_index:"Access to healthcare (UHC index, 0–100)", infant_mortality:"Infant mortality per 1,000 births",
    gdp_pc_ppp:"GDP per capita (PPP), int. $", gdp_growth:"GDP growth, %", inflation:"Inflation, %",
-   unemployment:"Unemployment, %", vulnerable_employment:"Insecure (vulnerable) employment, %",
+   unemployment:"Unemployment, %", vulnerable_employment:"Insecure (vulnerable) employment, %", manpower_neo:"Employers' hiring outlook (ManpowerGroup NEO), %",
    rule_of_law_0_100:"Rule of law (0–100)", control_corruption_0_100:"Control of corruption (0–100)"
   },
-  pisaParts:"math / reading / science"
+  year:"year", pisaParts:"math / reading / science",
+  about:`<h2>How it works</h2>
+   <p>The service answers one question: <b>which country fits you for a move</b>. You set how important each factor is (0–5) and the map recolors countries: green — strong match, red — weak.</p>
+   <h3>How the score is built</h3>
+   <ul><li>Each factor is built from 1–3 official indicators.</li>
+   <li>For every indicator a country gets a percentile 0–100: <b>“better than N% of countries”</b>. It is a position in the world ranking, not a probability.</li>
+   <li>The factor is a weighted average of its indicators; the final match is the average of factors weighted by your sliders.</li>
+   <li>If a country lacks data for more than 40% of what matters to you, it turns grey.</li>
+   <li><b>Ease of legal entry</b> depends on your passport: no visa for 90+ days = 100, visa required = 15. Years to residence and citizenship will be added next.</li></ul>`,
+  rules:`<h3>Rules</h3><ul>
+   <li>Only official sources; values not older than 2021.</li>
+   <li>Exchange rates are not used — there is no reliable source to keep them current.</li>
+   <li>Disputed territories are shown in white and are not assigned to any country.</li>
+   <li>Dependent territories and micro-states (under 250k people) are not ranked.</li></ul>`,
+  tableT:"What is inside each factor", weight:"weight"
  },
  ru:{
-  title:"Куда переехать?",
-  subtitle:"Задайте, что для вас важно, — карта перекрасит страны по тому, насколько они подходят под ваши приоритеты.",
-  whatMatters:"Что для вас важно",
-  sliderHint:"Двигайте ползунки: 0 — не учитывать, 5 — очень важно.",
-  low:"не важно", high:"очень важно",
+  title:"Куда переехать?", subtitle:"Задайте, что для вас важно, — карта перекрасит страны.",
+  how:"Как это работает", whatMatters:"Что для вас важно", sliderHint:"0 — не учитывать, 5 — очень важно",
   presets:{equal:"Поровну",family:"Семья с детьми",remote:"Удалёнщик",career:"Карьера"},
-  loading:"Загружаю карту…",
-  legendTitle:"Совпадение с вашими приоритетами", legendLow:"слабое", legendHigh:"сильное", noData:"мало данных",
-  topTitle:"Лучшие совпадения", aboutTitle:"Как считается",
-  about1:"Каждый фактор собран из 1–3 официальных показателей. По каждому показателю страна получает процентиль 0–100 (100 — лучше всех в мире), затем факторы усредняются с весами ваших ползунков.",
-  about2:"Берём только значения 2021 года и новее. Курсы валют не показываем: нет надёжного источника, чтобы держать их актуальными.",
-  about3:"Качество образования опирается на PISA 2025 — есть только для ~85 стран-участниц. Если фактор для вас очень важен, страны без PISA становятся серыми.",
-  match:"совпадение", rank:"место", of:"из", factors:"Факторы", indicators:"Показатели", year:"год", source:"источник",
-  noWeights:"Поднимите хотя бы один ползунок выше 0.",
-  notEnough:"Мало данных под ваши приоритеты",
-  partial:"PISA охватывает только часть страны.",
-  sources:"Источники:", geoSrc:"Границы:",
-  footNote:"Прототип v0.1. Значения не старше 2021 года. Не является финансовой или миграционной консультацией.",
-  generated:"Данные собраны:",
+  loading:"Загружаю карту…", legendTitle:"Совпадение с вашими приоритетами", legendLow:"слабое", legendHigh:"сильное",
+  noData:"мало данных", disputed:"спорная территория", disputedT:"Спорная территория",
+  topTitle:"Лучшие совпадения",
+  match:"совпадение", rank:"место", of:"из", factors:"Факторы",
+  factorCap:"0–100: место страны среди всех стран (100 — лучшая). Нажмите на фактор, чтобы увидеть, из чего он состоит.",
+  better:"лучше, чем у {n}% стран",
+  noWeights:"Поднимите хотя бы один ползунок выше 0.", notEnough:"Мало данных под ваши приоритеты",
+  noVal:"нет данных", sources:"Источники:",
+  footNote:"Прототип v0.2 · значения не старше 2021 года · не является юридической или миграционной консультацией.", generated:"Данные:",
+  citizenship:"Ваше гражданство", choose:"— выберите —", needCit:"Укажите гражданство, чтобы учесть этот фактор",
+  entry:"Въезд для граждан: {c}", legalSoon:"Дальше добавим: сроки до ВНЖ/ПМЖ и гражданства.",
+  visaNoData:"Визовые данные ещё не загружены (запустите extra_data.py).",
+  visa:["въезд запрещён","нужна виза","электронная виза","электронное разрешение (eTA)","виза по прилёту","без визы, меньше 30 дней","без визы, 30–89 дней","без визы, 90+ дней","ваша страна"],
   f:{
+   legal:["Лёгкость легализации","визовый режим для вашего паспорта"],
    safety:["Безопасность","убийства, политическая стабильность"],
    cost:["Дешевизна жизни","уровень цен относительно США"],
    education:["Качество образования","PISA 2025, охват вузами"],
    health:["Медицина","продолжительность жизни, доступ к лечению, младенческая смертность"],
    economy:["Экономика","ВВП на душу, рост, инфляция"],
-   jobs:["Лёгкость поиска работы","безработица, неустойчивая занятость"],
+   labor:["Рынок труда","безработица, неустойчивая занятость, планы найма работодателей"],
    laws:["Надёжность законов","суды, права собственности, коррупция"]
   },
   ind:{
@@ -282,38 +332,50 @@ const T = {
    price_level_vs_usa:"Уровень цен, % от США", pisa:"PISA 2025, средний балл", tertiary_enrollment:"Охват высшим образованием (валовой), %",
    life_expectancy:"Ожидаемая продолжительность жизни, лет", uhc_index:"Доступ к медицине (индекс UHC, 0–100)", infant_mortality:"Младенческая смертность на 1000 рождений",
    gdp_pc_ppp:"ВВП на душу (ППС), межд. $", gdp_growth:"Рост ВВП, %", inflation:"Инфляция, %",
-   unemployment:"Безработица, %", vulnerable_employment:"Неустойчивая занятость, %",
+   unemployment:"Безработица, %", vulnerable_employment:"Неустойчивая занятость, %", manpower_neo:"Планы найма работодателей (ManpowerGroup NEO), %",
    rule_of_law_0_100:"Верховенство права (0–100)", control_corruption_0_100:"Контроль коррупции (0–100)"
   },
-  pisaParts:"матем. / чтение / естеств."
+  year:"год", pisaParts:"матем. / чтение / естеств.",
+  about:`<h2>Как это работает</h2>
+   <p>Сервис отвечает на один вопрос: <b>какая страна подходит вам для переезда</b>. Вы задаёте, насколько важен каждый фактор (0–5), а карта перекрашивает страны: зелёные — сильное совпадение, красные — слабое.</p>
+   <h3>Как считается оценка</h3>
+   <ul><li>Каждый фактор собран из 1–3 официальных показателей.</li>
+   <li>По каждому показателю страна получает процентиль 0–100: <b>«лучше, чем у N% стран»</b>. Это место в мировом рейтинге, а не вероятность.</li>
+   <li>Фактор — взвешенное среднее его показателей; итоговое совпадение — среднее факторов с весами ваших ползунков.</li>
+   <li>Если у страны нет данных больше чем по 40% важного для вас, она становится серой.</li>
+   <li><b>Лёгкость легализации</b> зависит от вашего паспорта: без визы на 90+ дней = 100, нужна виза = 15. Сроки до ВНЖ и гражданства добавим следующим шагом.</li></ul>`,
+  rules:`<h3>Правила</h3><ul>
+   <li>Только официальные источники; значения не старше 2021 года.</li>
+   <li>Курсы валют не используем — нет надёжного источника, чтобы держать их актуальными.</li>
+   <li>Спорные территории показаны белым и не относятся ни к одной стране.</li>
+   <li>Зависимые территории и микрогосударства (меньше 250 тыс. жителей) в рейтинг не входят.</li></ul>`,
+  tableT:"Из чего состоит каждый фактор", weight:"вес"
  },
  es:{
-  title:"¿A dónde mudarme?",
-  subtitle:"Indica qué te importa: el mapa colorea cada país según cuánto encaja con tus prioridades.",
-  whatMatters:"Qué te importa",
-  sliderHint:"Mueve los controles: 0 — no cuenta, 5 — muy importante.",
-  low:"no importa", high:"muy importante",
+  title:"¿A dónde mudarme?", subtitle:"Indica qué te importa: el mapa colorea los países según tus prioridades.",
+  how:"Cómo funciona", whatMatters:"Qué te importa", sliderHint:"0 — no cuenta, 5 — muy importante",
   presets:{equal:"Equilibrado",family:"Familia con hijos",remote:"Trabajo remoto",career:"Carrera"},
-  loading:"Cargando el mapa…",
-  legendTitle:"Coincidencia con tus prioridades", legendLow:"baja", legendHigh:"alta", noData:"pocos datos",
-  topTitle:"Mejores opciones", aboutTitle:"Cómo se calcula",
-  about1:"Cada factor se arma con 1–3 indicadores oficiales. En cada indicador el país recibe un percentil 0–100 (100 = el mejor del mundo) y luego los factores se promedian con los pesos de tus controles.",
-  about2:"Solo usamos valores de 2021 en adelante. No mostramos tipos de cambio: no hay una fuente confiable para mantenerlos al día.",
-  about3:"La calidad educativa se basa en PISA 2025, así que existe solo para ~85 países participantes. Si te importa mucho, los países sin PISA quedan en gris.",
-  match:"coincidencia", rank:"puesto", of:"de", factors:"Factores", indicators:"Indicadores", year:"año", source:"fuente",
-  noWeights:"Sube al menos un control por encima de 0.",
-  notEnough:"Pocos datos para tus prioridades",
-  partial:"PISA cubre solo una parte del país.",
-  sources:"Fuentes:", geoSrc:"Fronteras:",
-  footNote:"Prototipo v0.1. Valores no anteriores a 2021. No es asesoramiento financiero ni migratorio.",
-  generated:"Datos generados:",
+  loading:"Cargando el mapa…", legendTitle:"Coincidencia con tus prioridades", legendLow:"baja", legendHigh:"alta",
+  noData:"pocos datos", disputed:"territorio en disputa", disputedT:"Territorio en disputa",
+  topTitle:"Mejores opciones",
+  match:"coincidencia", rank:"puesto", of:"de", factors:"Factores",
+  factorCap:"0–100: posición del país entre todos (100 = el mejor). Toca un factor para ver qué incluye.",
+  better:"mejor que el {n}% de los países",
+  noWeights:"Sube al menos un control por encima de 0.", notEnough:"Pocos datos para tus prioridades",
+  noVal:"sin datos", sources:"Fuentes:",
+  footNote:"Prototipo v0.2 · valores no anteriores a 2021 · no es asesoramiento legal ni migratorio.", generated:"Datos:",
+  citizenship:"Tu ciudadanía", choose:"— elige —", needCit:"Elige tu ciudadanía para usar este factor",
+  entry:"Ingreso para ciudadanos de {c}", legalSoon:"Próximamente: años hasta la residencia y la ciudadanía.",
+  visaNoData:"Los datos de visas aún no están cargados (ejecuta extra_data.py).",
+  visa:["ingreso no permitido","se requiere visa","visa electrónica","autorización electrónica (eTA)","visa a la llegada","sin visa, menos de 30 días","sin visa, 30–89 días","sin visa, 90+ días","tu propio país"],
   f:{
+   legal:["Facilidad para radicarse","régimen de visas para tu pasaporte"],
    safety:["Seguridad","homicidios, estabilidad política"],
    cost:["Costo de vida bajo","nivel de precios vs. EE. UU."],
    education:["Calidad educativa","PISA 2025, matrícula universitaria"],
    health:["Salud","esperanza de vida, acceso a la atención, mortalidad infantil"],
    economy:["Economía","PIB per cápita, crecimiento, inflación"],
-   jobs:["Facilidad para encontrar trabajo","desempleo, empleo precario"],
+   labor:["Mercado laboral","desempleo, empleo precario, planes de contratación"],
    laws:["Leyes confiables","tribunales, propiedad, corrupción"]
   },
   ind:{
@@ -321,53 +383,81 @@ const T = {
    price_level_vs_usa:"Nivel de precios, % de EE. UU.", pisa:"PISA 2025, puntaje medio", tertiary_enrollment:"Matrícula universitaria (bruta), %",
    life_expectancy:"Esperanza de vida, años", uhc_index:"Acceso a la salud (índice UHC, 0–100)", infant_mortality:"Mortalidad infantil por 1.000 nacimientos",
    gdp_pc_ppp:"PIB per cápita (PPA), $ int.", gdp_growth:"Crecimiento del PIB, %", inflation:"Inflación, %",
-   unemployment:"Desempleo, %", vulnerable_employment:"Empleo precario (vulnerable), %",
+   unemployment:"Desempleo, %", vulnerable_employment:"Empleo precario (vulnerable), %", manpower_neo:"Planes de contratación (ManpowerGroup NEO), %",
    rule_of_law_0_100:"Estado de derecho (0–100)", control_corruption_0_100:"Control de la corrupción (0–100)"
   },
-  pisaParts:"mat. / lectura / ciencias"
+  year:"año", pisaParts:"mat. / lectura / ciencias",
+  about:`<h2>Cómo funciona</h2>
+   <p>El servicio responde una pregunta: <b>qué país te conviene para mudarte</b>. Indicas cuánto te importa cada factor (0–5) y el mapa colorea los países: verde — buena coincidencia, rojo — baja.</p>
+   <h3>Cómo se calcula</h3>
+   <ul><li>Cada factor se arma con 1–3 indicadores oficiales.</li>
+   <li>En cada indicador el país recibe un percentil 0–100: <b>«mejor que el N% de los países»</b>. Es una posición en el ranking mundial, no una probabilidad.</li>
+   <li>El factor es el promedio ponderado de sus indicadores; la coincidencia final es el promedio de factores con los pesos de tus controles.</li>
+   <li>Si a un país le faltan datos de más del 40% de lo que te importa, queda en gris.</li>
+   <li><b>Facilidad para radicarse</b> depende de tu pasaporte: sin visa por 90+ días = 100, con visa = 15. Luego sumaremos los años hasta la residencia y la ciudadanía.</li></ul>`,
+  rules:`<h3>Reglas</h3><ul>
+   <li>Solo fuentes oficiales; valores no anteriores a 2021.</li>
+   <li>No usamos tipos de cambio: no hay una fuente confiable para mantenerlos al día.</li>
+   <li>Los territorios en disputa se muestran en blanco y no se asignan a ningún país.</li>
+   <li>Los territorios dependientes y los microestados (menos de 250 mil hab.) no entran en el ranking.</li></ul>`,
+  tableT:"Qué incluye cada factor", weight:"peso"
  }
 };
-// small countries missing from the 110m map: drawn as dots [lon, lat]
-const DOTS = {AND:[1.52,42.51],ATG:[-61.85,17.12],ABW:[-69.97,12.52],BHR:[50.58,26.07],BRB:[-59.6,13.1],CPV:[-23.6,15.1],
- COM:[43.3,-11.7],CUW:[-68.99,12.17],DMA:[-61.37,15.41],FSM:[158.2,6.9],GRD:[-61.68,12.12],GUM:[144.79,13.44],HKG:[114.17,22.32],
- KIR:[173,1.42],LIE:[9.55,47.16],LCA:[-60.98,13.91],MAC:[113.55,22.2],MDV:[73.5,4.18],MLT:[14.5,35.9],MHL:[171.4,7.1],
- MUS:[57.55,-20.25],MCO:[7.42,43.74],NRU:[166.93,-0.53],PLW:[134.58,7.5],KNA:[-62.72,17.3],VCT:[-61.2,13.25],WSM:[-171.8,-13.8],
- SMR:[12.45,43.94],STP:[6.6,0.25],SYC:[55.45,-4.62],SGP:[103.82,1.35],SXM:[-63.05,18.04],TON:[-175.2,-21.2],TUV:[179.2,-8.5],
- VGB:[-64.62,18.42],VIR:[-64.9,18.34],ASM:[-170.7,-14.3],MNP:[145.7,15.2],BMU:[-64.75,32.3],CYM:[-81.25,19.3],FRO:[-6.9,62],
- GIB:[-5.35,36.14],IMN:[-4.55,54.23],CHI:[-2.2,49.3],MAF:[-63.08,18.07],TCA:[-71.8,21.8],PYF:[-149.5,-17.6],XKX:[20.9,42.6],
- LUX:[6.13,49.61],CYP:[33.4,35.1],QAT:[51.2,25.3],BRN:[114.9,4.9],TTO:[-61.3,10.5],BHS:[-77.4,25.0],PSE:[35.2,31.9],TLS:[125.7,-8.8]};
-const SRC = {wb:"World Bank WDI", wgi:"World Bank WGI", who:"WHO / World Bank", ilo:"ILO / World Bank", pisa:"OECD PISA 2025", indec:"INDEC"};
+const SRC = {wb:"World Bank WDI", wgi:"World Bank WGI", who:"WHO / World Bank", ilo:"ILO / World Bank", pisa:"OECD PISA 2025", indec:"INDEC", manpower:"ManpowerGroup MEOS"};
+const VISA_SCORE = [0,15,40,65,55,70,85,100,100];
 const PRESETS = {
-  equal:{safety:3,cost:3,education:3,health:3,economy:3,jobs:3,laws:3},
-  family:{safety:5,cost:2,education:5,health:4,economy:3,jobs:2,laws:3},
-  remote:{safety:4,cost:5,education:0,health:3,economy:2,jobs:0,laws:3},
-  career:{safety:3,cost:1,education:1,health:2,economy:5,jobs:5,laws:3}
+  equal: {legal:3,safety:3,cost:3,education:3,health:3,economy:3,labor:3,laws:3},
+  family:{legal:4,safety:5,cost:2,education:5,health:4,economy:3,labor:2,laws:3},
+  remote:{legal:5,safety:4,cost:5,education:0,health:3,economy:2,labor:0,laws:3},
+  career:{legal:4,safety:3,cost:1,education:1,health:2,economy:4,labor:5,laws:3}
 };
+// Disputed territories. Feature-level: matched by ISO3 or name. Area-level: drawn on top (approximate outlines).
+const DISPUTED_FEATURES = {
+  XKX:{ru:"Косово",en:"Kosovo",es:"Kosovo"},
+  ESH:{ru:"Западная Сахара",en:"Western Sahara",es:"Sáhara Occidental"}
+};
+const DISPUTED_NAMES = {"Kosovo":"XKX","W. Sahara":"ESH","Western Sahara":"ESH"};
+const DISPUTED_AREAS = [
+  {n:{ru:"Крым",en:"Crimea",es:"Crimea"}, c:[[33.62,46.18],[34.35,45.97],[35.02,45.67],[35.48,45.3],[36.1,45.47],[36.62,45.4],[36.45,45.08],[35.42,44.95],[34.72,44.76],[34.02,44.4],[33.38,44.55],[33.55,44.88],[33.0,45.3],[32.48,45.36],[33.28,45.78],[33.62,46.18]]},
+  {n:{ru:"Джамму и Кашмир",en:"Jammu and Kashmir",es:"Jammu y Cachemira"}, c:[[73.4,33.0],[74.0,32.5],[75.3,32.3],[76.5,32.6],[77.8,32.5],[78.8,32.4],[79.4,32.6],[79.6,33.3],[80.2,34.2],[80.2,35.4],[79.0,35.9],[77.8,35.9],[76.8,36.2],[75.8,36.7],[74.6,37.0],[73.2,36.8],[72.5,36.0],[73.3,35.2],[73.6,34.4],[73.4,33.6],[73.4,33.0]]},
+  {n:{ru:"Абьей",en:"Abyei",es:"Abyei"}, c:[[27.75,9.25],[28.95,9.3],[29.05,9.95],[28.3,10.25],[27.8,10.05],[27.75,9.25]]}
+];
+// Dependent territories drawn as part of their sovereign state
+const PARENT = {GRL:"DNK", PRI:"USA", NCL:"FRA", ATF:"FRA"};
+// small countries missing from the 110m map: drawn as dots [lon, lat]
+const DOTS = {BHR:[50.58,26.07],BRB:[-59.6,13.1],CPV:[-23.6,15.1],COM:[43.3,-11.7],HKG:[114.17,22.32],MAC:[113.55,22.2],
+ MDV:[73.5,4.18],MLT:[14.5,35.9],MUS:[57.55,-20.25],SGP:[103.82,1.35],LUX:[6.13,49.61],CYP:[33.4,35.1],QAT:[51.2,25.3],
+ BRN:[114.9,4.9],TTO:[-61.3,10.5],BHS:[-77.4,25.0],PSE:[35.2,31.9],TLS:[125.7,-8.8],ISL:[-19,64.9],MNE:[19.3,42.7],
+ WSM:[-171.8,-13.8],STP:[6.6,0.25],LCA:[-60.98,13.91],SLB:[160,-9.4],VUT:[167.7,-15.4],FJI:[178,-17.8],BLZ:[-88.5,17.2],
+ GNQ:[10.3,1.6],DJI:[42.6,11.8],SWZ:[31.5,-26.5],GMB:[-15.3,13.4],BTN:[90.4,27.5]};
 
 /* ---------- state ---------- */
 function load(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
 function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 const navLang = (navigator.language||"en").slice(0,2);
 let lang = load("kp_lang", T[navLang] ? navLang : "en");
-let W = Object.assign({}, PRESETS.equal, load("kp_w", {}));
-let DATA, byIso = new Map(), scores = new Map(), ranks = new Map(), selected = null;
-let features = [], dots = [], svg, gMap, gDots, gPins, gFx, path, projection, zoom, width = 1000, height = 520;
+let W = Object.assign({}, PRESETS.equal, load("kp_w2", {}));
+let CIT = load("kp_cit", "");
+let DATA, VISA = null, visaIdx = new Map(), byIso = new Map(), scores = new Map(), ranks = new Map(), selected = null;
+let features = [], dots = [], areas = [], svg, root, gMap, gDots, gPins, gFx, path, projection, zoom, width = 1000, height = 520;
+let openAcc = new Set();
 
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
 const t = k => T[lang][k];
 const nf = (v, d) => new Intl.NumberFormat(lang, {maximumFractionDigits:d, minimumFractionDigits:0}).format(v);
 let dn = null;
-function cname(c){
-  if(!c) return "";
+function regionName(iso2, fallback){
   try{ if(!dn || dn._l !== lang){ dn = new Intl.DisplayNames([lang], {type:"region"}); dn._l = lang; }
-       const n = c.iso2 && dn.of(c.iso2); if(n && n !== c.iso2) return n; }catch(e){}
-  return c.name;
+       const n = iso2 && dn.of(iso2); if(n && n !== iso2) return n; }catch(e){}
+  return fallback;
 }
+const cname = c => c ? regionName(c.iso2, c.name) : "";
 function flag(iso2){
-  if(!iso2 || iso2.length!==2 || !/^[A-Z]{2}$/.test(iso2)) return "";
+  if(!iso2 || !/^[A-Z]{2}$/.test(iso2)) return "";
   return String.fromCodePoint(...[...iso2].map(ch => 0x1F1E6 + ch.charCodeAt(0) - 65));
 }
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
 function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 let colorScale, noDataColor;
 function buildColors(){
@@ -378,16 +468,26 @@ function buildColors(){
 const colorOf = s => (s==null ? noDataColor : colorScale(s));
 
 /* ---------- scoring ---------- */
+const legalOn = () => !!(VISA && CIT && VISA.p[CIT]);
+function visaCode(dest){
+  if(!legalOn()) return null;
+  const i = visaIdx.get(dest); if(i == null) return null;
+  const ch = VISA.p[CIT][i]; return ch === "-" ? null : +ch;
+}
+function factor(c, k){
+  if(k === "legal"){ const v = visaCode(c.iso3); return v == null ? null : VISA_SCORE[v]; }
+  return c.f ? (c.f[k] ?? null) : null;
+}
+function activeW(k){ return (k === "legal" && !legalOn()) ? 0 : (+W[k] || 0); }
 function compute(){
-  const total = ORDER.reduce((a,k)=>a+(+W[k]||0),0);
-  scores.clear(); ranks.clear();
+  const total = ORDER.reduce((a,k)=>a+activeW(k),0);
+  scores.clear(); ranks.clear(); ranks.n = 0;
   if(total <= 0) return;
   DATA.countries.forEach(c => {
     let s=0, w=0;
-    ORDER.forEach(k => { const wk=+W[k]||0; const f=c.f && c.f[k]; if(wk>0 && f!=null){ s+=wk*f; w+=wk; } });
+    ORDER.forEach(k => { const wk=activeW(k); const f=factor(c,k); if(wk>0 && f!=null){ s+=wk*f; w+=wk; } });
     scores.set(c.iso3, (w/total >= 0.6) ? Math.round(s/w) : null);
   });
-  // rank scores to 0..100 relative stretch is NOT applied: score = weighted percentile average
   const sorted = [...scores].filter(d=>d[1]!=null).sort((a,b)=>b[1]-a[1]);
   sorted.forEach((d,i)=>ranks.set(d[0], i+1));
   ranks.n = sorted.length;
@@ -396,7 +496,7 @@ function compute(){
 /* ---------- UI: texts & sliders ---------- */
 function applyTexts(){
   document.documentElement.lang = lang;
-  document.title = t("title") + " — " + (lang==="ru"?"карта стран":lang==="es"?"mapa de países":"country map");
+  document.title = t("title");
   document.querySelectorAll("[data-i]").forEach(el => { const v = t(el.dataset.i); if(typeof v==="string") el.textContent = v; });
   document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.l===lang));
   if(DATA) $("#gen").textContent = t("generated") + " " + DATA.generated;
@@ -407,46 +507,61 @@ function buildPresets(){
   Object.keys(PRESETS).forEach(p => {
     const b = document.createElement("button");
     b.textContent = t("presets")[p];
-    b.classList.toggle("on", ORDER.every(k => PRESETS[p][k] === +W[k]));
-    b.onclick = () => { W = Object.assign({}, PRESETS[p]); save("kp_w", W); buildPresets(); buildSliders(); update(true); };
+    b.onclick = () => { W = Object.assign({}, PRESETS[p]); save("kp_w2", W); buildSliders(); markPresets(); update(true); };
     box.appendChild(b);
   });
-}
-function buildSliders(){
-  const box = $("#sliders"); box.innerHTML = "";
-  ORDER.forEach(k => {
-    const [name, sub] = t("f")[k];
-    const d = document.createElement("div"); d.className = "f" + (+W[k]===0?" off":"");
-    d.innerHTML = `<div class="f-top"><label class="f-name" for="s_${k}">${name}</label><span class="f-val"><b>${W[k]}</b> / 5</span></div>
-      <div class="f-sub">${sub}</div>
-      <input id="s_${k}" type="range" min="0" max="5" step="1" value="${W[k]}" style="--p:${W[k]*20}%" aria-valuetext="${W[k]} / 5">
-      <div class="scale-lbl"><span>${t("low")}</span><span>${t("high")}</span></div>`;
-    const inp = d.querySelector("input");
-    inp.addEventListener("input", () => {
-      W[k] = +inp.value; inp.style.setProperty("--p", W[k]*20+"%");
-      d.querySelector(".f-val b").textContent = W[k]; d.classList.toggle("off", W[k]===0);
-      inp.setAttribute("aria-valuetext", W[k]+" / 5");
-      save("kp_w", W); markPresets(); update(true);
-    });
-    box.appendChild(d);
-  });
+  markPresets();
 }
 function markPresets(){
   const btns = $("#presets").querySelectorAll("button");
   Object.keys(PRESETS).forEach((p,i)=> btns[i] && btns[i].classList.toggle("on", ORDER.every(k => PRESETS[p][k] === +W[k])));
 }
+function citizenshipOptions(){
+  if(!VISA) return "";
+  const list = Object.keys(VISA.p).map(iso => {
+    const c = byIso.get(iso); const iso2 = c ? c.iso2 : (DATA.iso2 && DATA.iso2[iso]);
+    return {iso, name: c ? cname(c) : regionName(iso2, iso)};
+  }).sort((a,b)=>a.name.localeCompare(b.name, lang));
+  return `<option value="">${t("choose")}</option>` + list.map(o => `<option value="${o.iso}"${o.iso===CIT?" selected":""}>${esc(o.name)}</option>`).join("");
+}
+function buildSliders(){
+  const box = $("#sliders"); box.innerHTML = "";
+  ORDER.forEach(k => {
+    const [name, sub] = t("f")[k];
+    const d = document.createElement("div");
+    const na = k === "legal" && !legalOn();
+    d.className = "f" + (+W[k]===0?" off":"") + (na?" na":"");
+    d.innerHTML = `<div class="f-top"><span class="f-name"><label for="s_${k}">${name}</label>
+        <button class="info" aria-expanded="false" aria-label="?">i</button></span>
+        <span class="f-val"><b>${W[k]}</b> / 5</span></div>
+      <div class="f-sub">${sub}${k==="legal" && !VISA ? ". " + t("visaNoData") : ""}</div>
+      ${k==="legal" ? `<div class="cit${VISA && !CIT ? " need":""}"><span>${t("citizenship")}</span><select id="cit" ${VISA?"":"disabled"}>${citizenshipOptions()}</select></div>` : ""}
+      <input id="s_${k}" type="range" min="0" max="5" step="1" value="${W[k]}" style="--p:${W[k]*20}%" aria-valuetext="${W[k]} / 5">`;
+    const inp = d.querySelector("input[type=range]");
+    inp.addEventListener("input", () => {
+      W[k] = +inp.value; inp.style.setProperty("--p", W[k]*20+"%");
+      d.querySelector(".f-val b").textContent = W[k]; d.classList.toggle("off", W[k]===0);
+      inp.setAttribute("aria-valuetext", W[k]+" / 5");
+      save("kp_w2", W); markPresets(); update(true);
+    });
+    const ib = d.querySelector(".info"), sb = d.querySelector(".f-sub");
+    ib.onclick = () => { const on = !sb.classList.contains("on"); sb.classList.toggle("on", on); ib.setAttribute("aria-expanded", on); };
+    if(na && VISA) { sb.classList.add("on"); ib.setAttribute("aria-expanded", true); sb.textContent = t("needCit"); }
+    const sel = d.querySelector("select");
+    if(sel) sel.onchange = () => { CIT = sel.value; save("kp_cit", CIT); buildSliders(); update(true); };
+    box.appendChild(d);
+  });
+}
 
 /* ---------- map ---------- */
 async function loadGeometry(){
-  // 1) world-atlas TopoJSON (numeric ISO ids) — works on GitHub Pages
   try{
     const r = await fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json");
     if(!r.ok) throw new Error(r.status);
     const topo = await r.json();
     return topojson.feature(topo, topo.objects.countries).features.map(f => {
-      f.iso3 = DATA.num_to_iso3[String(f.id).padStart(3,"0")] || null; return f; });
+      f.iso3 = f.id != null ? (DATA.num_to_iso3[String(f.id).padStart(3,"0")] || null) : null; return f; });
   }catch(e){ /* fall through */ }
-  // 2) fallback: datamaps bundle as a script (ISO3 ids)
   await new Promise((res, rej) => {
     const s = document.createElement("script");
     s.src = "https://cdn.jsdelivr.net/npm/datamaps@0.5.9/dist/datamaps.world.min.js";
@@ -454,54 +569,107 @@ async function loadGeometry(){
   });
   const topo = window.Datamap.prototype.worldTopo;
   const key = Object.keys(topo.objects)[0];
-  return topojson.feature(topo, topo.objects[key]).features.map(f => { f.iso3 = f.id; return f; });
+  return topojson.feature(topo, topo.objects[key]).features.map(f => { f.iso3 = /^[A-Z]{3}$/.test(f.id) ? f.id : null; return f; });
+}
+function prepFeatures(raw){
+  return raw.filter(f => f.iso3 !== "ATA" && String(f.id) !== "010").map(f => {
+    const nm = f.properties && f.properties.name;
+    const dkey = DISPUTED_FEATURES[f.iso3] ? f.iso3 : DISPUTED_NAMES[nm];
+    if(dkey){ f.disputed = DISPUTED_FEATURES[dkey]; f.iso3 = null; }
+    else if(PARENT[f.iso3]) f.iso3 = PARENT[f.iso3];
+    return f;
+  });
+}
+function polyFeature(coords){
+  let f = {type:"Feature", geometry:{type:"Polygon", coordinates:[coords]}};
+  if(d3.geoArea(f) > 2*Math.PI) f.geometry.coordinates = [coords.slice().reverse()];
+  return f;
 }
 
 function setupMap(){
   svg = d3.select("#map");
   const box = $("#mapbox");
   width = Math.max(320, box.clientWidth);
+  const wide = window.innerWidth > 980;
+  const avail = wide ? Math.max(360, window.innerHeight - box.getBoundingClientRect().top - window.scrollY - 40) : 9999;
   const land = {type:"FeatureCollection", features};
   projection = d3.geoNaturalEarth1();
   projection.fitWidth(width - 16, land);
+  let b = d3.geoPath(projection).bounds(land);
+  let h = b[1][1] - b[0][1];
+  height = Math.round(Math.min(h + 16, Math.max(avail, 300)));
+  projection.fitExtent([[8,8],[width-8,height-8]], land);
   path = d3.geoPath(projection);
-  const b = path.bounds(land);
-  height = Math.ceil(b[1][1] - b[0][1] + 16);
-  projection.translate([projection.translate()[0] + 8 - b[0][0] + 0, projection.translate()[1] + 8 - b[0][1]]);
-  svg.attr("viewBox", `0 0 ${width} ${height}`);
+  svg.attr("viewBox", `0 0 ${width} ${height}`).attr("height", height);
+  if(wide) $("#side").style.maxHeight = (height + 2) + "px";
   svg.selectAll("*").remove();
 
-  const root = svg.append("g");
+  root = svg.append("g");
   gMap = root.append("g");
   gMap.append("path").datum(d3.geoGraticule10()).attr("class","grat").attr("d", path);
-  gMap.selectAll("path.country").data(features, d => d.iso3 || d.id).join("path")
-    .attr("class","country").attr("d", path)
-    .attr("fill", noDataColor)
-    .style("opacity", 0)
-    .on("pointerenter", onEnter).on("pointermove", onMove).on("pointerleave", onLeave)
-    .on("click", onClick);
+  gMap.selectAll("path.country").data(features.filter(f => !f.disputed)).join("path")
+    .attr("class","country").attr("d", path).attr("fill", noDataColor).style("opacity", 0)
+    .on("pointerenter", onEnter).on("pointermove", onMove).on("pointerleave", onLeave).on("click", onClick);
+  // disputed: whole features + drawn areas, on top
+  const disp = features.filter(f => f.disputed).map(f => ({f, n:f.disputed}))
+    .concat(DISPUTED_AREAS.map(a => ({f: polyFeature(a.c), n: a.n})));
+  areas = disp;
+  gMap.selectAll("path.disputed").data(disp).join("path").attr("class","disputed").attr("d", d => path(d.f)).style("opacity",0)
+    .on("pointerenter", function(ev,d){ d3.select(this).classed("hov",true); showTip(ev, d, true); })
+    .on("pointermove", (ev,d) => showTip(ev, d, true))
+    .on("pointerleave", function(){ d3.select(this).classed("hov",false); hideTip(); })
+    .on("click", (ev) => { ev.stopPropagation(); ripple(ev); });
+
   const have = new Set(features.map(f => f.iso3));
   dots = DATA.countries.filter(c => !have.has(c.iso3) && DOTS[c.iso3]).map(c => ({iso3:c.iso3, xy:projection(DOTS[c.iso3])}));
   gDots = root.append("g");
-  gDots.selectAll("g.dot").data(dots, d => d.iso3).join("g").attr("class","dot")
-    .attr("transform", d => `translate(${d.xy})`)
-    .append("circle").attr("class","country").attr("r", 3.6).attr("fill", noDataColor).style("opacity", 0)
-    .on("pointerenter", onEnter).on("pointermove", onMove).on("pointerleave", onLeave).on("click", onClick);
-  gPins = root.append("g").attr("class","pins");
-  gFx = svg.append("g"); // screen-space effects (ripples)
+  const dg = gDots.selectAll("g.dot").data(dots, d => d.iso3).join("g").attr("class","dot")
+    .attr("transform", d => `translate(${d.xy})`);
+  dg.append("circle").attr("class","country").attr("r", 4.5).attr("fill", noDataColor).style("opacity", 0);
+  dg.append("circle").attr("class","hit").attr("r", 11)
+    .on("pointerenter", function(ev,d){ d3.select(this.parentNode).select(".country").classed("hov",true); showTip(ev,d); })
+    .on("pointermove", (ev,d) => showTip(ev,d))
+    .on("pointerleave", function(){ d3.select(this.parentNode).select(".country").classed("hov",false); hideTip(); })
+    .on("click", onClick);
+  gPins = root.append("g");
+  gFx = svg.append("g");
 
-  zoom = d3.zoom().scaleExtent([1, 10]).translateExtent([[0,0],[width,height]])
-    .on("zoom", ev => { root.attr("transform", ev.transform);
-      gDots.selectAll("g.dot").attr("transform", d => `translate(${d.xy})scale(${1/ev.transform.k})`); gPins.selectAll("g.pin").attr("transform", d => `translate(${d.xy})scale(${1/ev.transform.k})`); });
+  zoom = d3.zoom().scaleExtent([1, 12])
+    .translateExtent([[-width*0.15, -height*0.12],[width*1.15, height*1.12]])
+    .filter(ev => ev.type !== "wheel" && !ev.ctrlKey && !ev.button)
+    .on("zoom", ev => {
+      root.attr("transform", ev.transform);
+      const s = 1/ev.transform.k;
+      gDots.selectAll("g.dot").attr("transform", d => `translate(${d.xy})scale(${s})`);
+      gPins.selectAll("g.pin").attr("transform", d => `translate(${d.xy})scale(${s})`);
+      hideTip();
+    });
   svg.call(zoom).on("dblclick.zoom", null);
-  svg.on("click.bg", ev => { if(ev.target === svg.node()) closeCard(); });
+  svg.node().addEventListener("wheel", onWheel, {passive:false});
+  svg.on("click.bg", ev => { if(ev.target === svg.node() || ev.target.classList.contains("grat")) closeCard(); });
 
   // intro: countries appear in a west→east wave
-  const xs = features.map(f => path.centroid(f)[0]);
-  gDots.selectAll("circle.country").transition("intro").duration(REDUCED?0:500).delay(REDUCED?0:1100).style("opacity",1);
-  gMap.selectAll("path.country")
-    .transition("intro").duration(REDUCED?0:700).delay((d,i) => REDUCED?0:(xs[i]/width)*900 + Math.random()*120)
+  gMap.selectAll("path.country,path.disputed").transition("intro").duration(REDUCED?0:700)
+    .delay(function(d){ const f = d.f || d; return REDUCED?0:(path.centroid(f)[0]/width)*900 + Math.random()*120; })
     .ease(d3.easeCubicOut).style("opacity", 1);
+  gDots.selectAll("circle.country").transition("intro").duration(REDUCED?0:500).delay(REDUCED?0:1000).style("opacity",1);
+}
+
+// Trackpad: two-finger scroll pans, pinch (ctrl+wheel) zooms. Mouse wheel zooms.
+function onWheel(ev){
+  ev.preventDefault();
+  const pt = d3.pointer(ev, svg.node());
+  if(ev.ctrlKey){
+    svg.call(zoom.scaleBy, Math.pow(2, -ev.deltaY * 0.012), pt); return;
+  }
+  const mouseLike = ev.deltaMode !== 0 || (ev.deltaX === 0 && Math.abs(ev.deltaY) >= 50 && Number.isInteger(ev.deltaY));
+  if(mouseLike){
+    svg.transition().duration(REDUCED?0:180).call(zoom.scaleBy, ev.deltaY < 0 ? 1.35 : 1/1.35, pt);
+  } else {
+    const k = d3.zoomTransform(svg.node()).k;
+    const scale = width / svg.node().getBoundingClientRect().width;
+    svg.call(zoom.translateBy, -ev.deltaX * scale / k, -ev.deltaY * scale / k);
+  }
 }
 
 function update(animate){
@@ -517,24 +685,26 @@ function update(animate){
   if(selected) renderCard(selected, false);
 }
 
+function largestPart(f){
+  if(f.geometry.type !== "MultiPolygon") return f;
+  let best = f, ma = -1;
+  f.geometry.coordinates.forEach(c => { const p = {type:"Polygon",coordinates:c}; const a = path.area(p); if(a>ma){ma=a; best=p;} });
+  return best;
+}
+function featureOf(iso){ return features.find(x => x.iso3 === iso && !x.disputed); }
 function drawPins(){
   const top = [...ranks].sort((a,b)=>a[1]-b[1]).slice(0,3).map(d=>d[0]);
   const items = top.map((iso,i) => {
-    const f = features.find(x => x.iso3 === iso);
+    const f = featureOf(iso);
     if(!f){ const dt = dots.find(x => x.iso3 === iso); return dt ? {iso, i, xy: dt.xy} : null; }
-    // biggest polygon centroid for multi-part countries
-    let g = f.geometry, best = f;
-    if(g.type === "MultiPolygon"){
-      let ma = -1; g.coordinates.forEach(c => { const p = {type:"Polygon",coordinates:c}; const a = path.area(p); if(a>ma){ma=a; best=p;} });
-    }
-    return {iso, i, xy: path.centroid(best)};
+    return {iso, i, xy: path.centroid(largestPart(f))};
   }).filter(Boolean);
   const k = d3.zoomTransform(svg.node()).k;
   const pins = gPins.selectAll("g.pin").data(items, d => d.iso);
   pins.exit().transition().duration(250).style("opacity",0).remove();
   const enter = pins.enter().append("g").attr("class","pin").style("opacity",0);
   enter.append("circle").attr("class","halo").attr("r",4);
-  enter.append("circle").attr("class","core").attr("r",4);
+  enter.append("circle").attr("class","core").attr("r",3.5);
   enter.append("text").attr("x",8).attr("y",4);
   const all = enter.merge(pins);
   all.attr("transform", d => `translate(${d.xy})scale(${1/k})`)
@@ -546,22 +716,32 @@ function drawPins(){
 const tip = $("#tip");
 function onEnter(ev, d){
   const el = d3.select(this); el.classed("hov", true);
-  if(this.tagName === "path"){ el.raise(); gMap.selectAll("path.country.sel").raise(); }
+  if(this.tagName === "path"){ el.raise(); gMap.selectAll("path.country.sel").raise(); gMap.selectAll("path.disputed").raise(); }
   showTip(ev, d);
 }
 function onMove(ev, d){ showTip(ev, d); }
-function onLeave(){ d3.select(this).classed("hov", false); tip.classList.remove("on"); }
-function showTip(ev, d){
-  const c = byIso.get(d.iso3);
-  const name = c ? cname(c) : (d.properties && d.properties.name) || "—";
-  const s = scores.get(d.iso3), r = ranks.get(d.iso3);
-  tip.innerHTML = `<b>${flag(c && c.iso2)} ${name}</b><br><span class="m">${
-    s!=null ? `${t("match")} ${s}% · ${t("rank")} ${r} ${t("of")} ${ranks.n}` : (c? t("notEnough") : t("noData"))}</span>`;
+function onLeave(){ d3.select(this).classed("hov", false); hideTip(); }
+function hideTip(){ tip.classList.remove("on"); }
+function showTip(ev, d, isDisputed){
+  if(isDisputed){
+    tip.innerHTML = `<b>${esc(d.n[lang])}</b><br><span class="m">${t("disputedT")}</span>`;
+  } else {
+    const c = byIso.get(d.iso3);
+    const name = c ? cname(c) : (d.properties && d.properties.name) || "—";
+    const s = scores.get(d.iso3), r = ranks.get(d.iso3);
+    tip.innerHTML = `<b>${flag(c && c.iso2)} ${esc(name)}</b><br><span class="m">${
+      s!=null ? `${t("match")} ${s}/100 · ${t("rank")} ${r} ${t("of")} ${ranks.n}` : (c ? t("notEnough") : t("noData"))}</span>`;
+  }
+  // keep the tooltip fully inside the map
   const box = $("#mapbox").getBoundingClientRect();
-  let x = ev.clientX - box.left + 14, y = ev.clientY - box.top + 14;
-  const tw = tip.offsetWidth || 180;
-  if(x + tw > box.width - 8) x = ev.clientX - box.left - tw - 14;
-  tip.style.left = x + "px"; tip.style.top = y + "px"; tip.classList.add("on");
+  tip.classList.add("on");
+  const tw = tip.offsetWidth, th = tip.offsetHeight, pad = 8, off = 14;
+  let x = ev.clientX - box.left + off, y = ev.clientY - box.top + off;
+  if(x + tw > box.width - pad) x = ev.clientX - box.left - tw - off;
+  if(y + th > box.height - pad) y = ev.clientY - box.top - th - off;
+  x = Math.max(pad, Math.min(x, box.width - tw - pad));
+  y = Math.max(pad, Math.min(y, box.height - th - pad));
+  tip.style.transform = `translate(${x}px,${y}px)`;
 }
 function ripple(ev){
   if(REDUCED) return;
@@ -578,93 +758,107 @@ function onClick(ev, d){
 function select(iso, zoomTo){
   selected = iso;
   svg.selectAll(".country").classed("sel", f => f.iso3 === iso);
-  gMap.selectAll("path.country.sel").raise();
-  const f = features.find(x => x.iso3 === iso), dt = dots.find(x => x.iso3 === iso);
+  gMap.selectAll("path.country.sel").raise(); gMap.selectAll("path.disputed").raise();
+  const f = featureOf(iso), dt = dots.find(x => x.iso3 === iso);
   if(zoomTo && f) zoomToFeature(f);
   else if(zoomTo && dt) zoomToPoint(dt.xy, 5);
+  $("#top").classList.add("hide");
   renderCard(iso, true);
 }
-function cardOffset(){ return window.innerWidth > 980 ? 360 * (width / $("#mapbox").clientWidth) : 0; }
+function cardOffset(){ return window.innerWidth > 980 ? 350 * (width / $("#mapbox").clientWidth) : 0; }
 function zoomToPoint([cx,cy], k){
   const availW = width - cardOffset();
   svg.transition().duration(REDUCED?0:850).ease(d3.easeCubicInOut)
     .call(zoom.transform, d3.zoomIdentity.translate(availW/2 - k*cx, height/2 - k*cy).scale(k));
 }
 function zoomToFeature(f){
-  let g = f;
-  if(f.geometry.type === "MultiPolygon"){ // zoom to the largest landmass (avoids e.g. France + Guiana)
-    let ma=-1; f.geometry.coordinates.forEach(c=>{ const p={type:"Polygon",coordinates:c}; const a=path.area(p); if(a>ma){ma=a; g=p;} });
-  }
-  const [[x0,y0],[x1,y1]] = path.bounds(g);
+  const [[x0,y0],[x1,y1]] = path.bounds(largestPart(f));
   const availW = width - cardOffset();
   const k = Math.max(1, Math.min(6, 0.7 / Math.max((x1-x0)/availW, (y1-y0)/height)));
   zoomToPoint([(x0+x1)/2, (y0+y1)/2], k);
 }
 function closeCard(){
-  selected = null; $("#card").classList.remove("on");
+  selected = null; $("#card").classList.remove("on"); $("#top").classList.remove("hide");
   svg.selectAll(".country").classed("sel", false);
 }
 $("#zin").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1.6);
 $("#zout").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.6);
 $("#zreset").onclick = () => { closeCard(); svg.transition().duration(REDUCED?0:700).call(zoom.transform, d3.zoomIdentity); };
-document.addEventListener("keydown", e => { if(e.key === "Escape") closeCard(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape"){ closeModal(); closeCard(); } });
 
 /* ---------- card ---------- */
 function fmtInd(key, v){
   if(key==="price_level_vs_usa") return nf(v*100,0) + "%";
   if(key==="gdp_pc_ppp") return "$" + nf(v,0);
-  if(key==="pisa") return nf(v,0);
+  if(key==="manpower_neo") return (v>0?"+":"") + nf(v,0) + "%";
   if(["homicides_100k","gdp_growth","inflation","unemployment","vulnerable_employment","infant_mortality"].includes(key)) return nf(v,1);
   return nf(v,0);
+}
+function factorBody(c, k){
+  if(k === "legal"){
+    if(!VISA) return `<div class="note">${t("visaNoData")}</div>`;
+    if(!legalOn()) return `<div class="note">${t("needCit")}</div>`;
+    const code = visaCode(c.iso3), citC = byIso.get(CIT);
+    const citName = citC ? cname(citC) : CIT;
+    return `<div class="ind"><span>${t("entry").replace("{c}", esc(citName))}</span><span class="v">${code==null?t("noVal"):esc(t("visa")[code])}</span>
+      <span class="meta">Passport Index dataset${VISA.date ? " · " + VISA.date : ""}</span></div>
+      <div class="note">${t("legalSoon")}</div>`;
+  }
+  return DATA.factors[k].map(([ik]) => {
+    const val = c.v && c.v[ik];
+    if(!val) return `<div class="ind miss"><span>${t("ind")[ik]}</span><span class="v">—</span><span class="meta">${t("noVal")}</span></div>`;
+    const src = (c.src && c.src[ik]) || DATA.indicators[ik].src;
+    let extra = "";
+    if(ik==="pisa" && c.pisa3) extra = ` · ${t("pisaParts")}: ${c.pisa3.join(" / ")}`;
+    if(ik==="manpower_neo" && DATA.manpower_quarter) extra = ` · ${DATA.manpower_quarter}`;
+    const p = c.p && c.p[ik];
+    return `<div class="ind"><span>${t("ind")[ik]}</span><span class="v">${fmtInd(ik, val[0])}</span>
+      <span class="meta">${p!=null ? `<em>${t("better").replace("{n}", p)}</em> · ` : ""}${t("year")} ${val[1]} · ${SRC[src]||src}${extra}</span></div>`;
+  }).join("");
 }
 function renderCard(iso, animate){
   const c = byIso.get(iso); if(!c) return;
   const s = scores.get(iso), r = ranks.get(iso);
-  const R = 30, C = 2*Math.PI*R, pct = s==null ? 0 : s/100;
-  const used = new Set();
-  let factorsHtml = ORDER.map(k => {
-    const fv = c.f ? c.f[k] : null; const off = (+W[k]||0) === 0;
-    return `<div class="fb${off?" off":""}"><span>${t("f")[k][0]}</span>
-      <div class="track"><div class="fill" data-w="${fv==null?0:fv}" style="background:${colorOf(fv)}"></div></div>
-      <span class="n">${fv==null?"—":fv}</span></div>`;
+  const R = 27, C = 2*Math.PI*R, pct = s==null ? 0 : s/100;
+  const acc = ORDER.map(k => {
+    const fv = factor(c, k); const off = activeW(k) === 0;
+    return `<div class="acc${off?" off":""}${openAcc.has(k)?" open":""}" data-k="${k}">
+      <button aria-expanded="${openAcc.has(k)}"><span class="chev">▶</span><span>${t("f")[k][0]}</span>
+      <span class="track"><span class="fill" style="display:block;background:${colorOf(fv)};width:${animate?0:(fv||0)}%" data-w="${fv==null?0:fv}"></span></span>
+      <span class="n">${fv==null?"—":fv}</span></button>
+      <div class="body">${factorBody(c, k)}</div></div>`;
   }).join("");
-  let indHtml = ORDER.map(k => DATA.factors[k].map(([ik]) => {
-    if(used.has(ik)) return ""; used.add(ik);
-    const val = c.v && c.v[ik]; if(!val) return "";
-    const src = (c.src && c.src[ik]) || DATA.indicators[ik].src;
-    let extra = "";
-    if(ik==="pisa" && c.pisa3) extra = ` (${t("pisaParts")}: ${c.pisa3.join(" / ")})`;
-    return `<div class="ind"><span>${t("ind")[ik]}</span><span class="v">${fmtInd(ik, val[0])}</span>
-      <span class="meta">${t("year")} ${val[1]} · ${SRC[src]||src}${extra}</span></div>`;
-  }).join("")).join("");
   const card = $("#card");
   card.innerHTML = `<button class="x" aria-label="Close">×</button>
-    <h3><span class="flag">${flag(c.iso2)}</span>${cname(c)}</h3>
+    <h3><span class="flag">${flag(c.iso2)}</span>${esc(cname(c))}</h3>
     <div class="score">
-      <svg class="donut" viewBox="0 0 74 74"><circle cx="37" cy="37" r="${R}" fill="none" stroke="var(--line)" stroke-width="8"/>
-        <circle class="arc" cx="37" cy="37" r="${R}" fill="none" stroke="${colorOf(s)}" stroke-width="8" stroke-linecap="round"
-          stroke-dasharray="${C}" stroke-dashoffset="${animate?C:C*(1-pct)}" transform="rotate(-90 37 37)" style="transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)"/>
-        <text x="37" y="43" text-anchor="middle">${s==null?"—":s}</text></svg>
-      <div class="rk">${s==null ? t("notEnough") : `${t("match")}<b>${t("rank")} ${r} ${t("of")} ${ranks.n}</b>`}</div>
+      <svg class="donut" viewBox="0 0 68 68"><circle cx="34" cy="34" r="${R}" fill="none" stroke="var(--line)" stroke-width="8"/>
+        <circle class="arc" cx="34" cy="34" r="${R}" fill="none" stroke="${colorOf(s)}" stroke-width="8" stroke-linecap="round"
+          stroke-dasharray="${C}" stroke-dashoffset="${animate?C:C*(1-pct)}" transform="rotate(-90 34 34)" style="transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)"/>
+        <text x="34" y="40" text-anchor="middle">${s==null?"—":s}</text></svg>
+      <div class="rk">${s==null ? t("notEnough") : `${t("match")} ${s}/100<b>${t("rank")} ${r} ${t("of")} ${ranks.n}</b>`}</div>
     </div>
-    <div class="sec">${t("factors")}</div>${factorsHtml}
-    <div class="sec">${t("indicators")}</div>${indHtml}
-    ${c.partial ? `<div class="note">${t("partial")}</div>` : ""}`;
+    <div class="sec">${t("factors")}</div><p class="cap">${t("factorCap")}</p>${acc}`;
   card.querySelector(".x").onclick = closeCard;
+  card.querySelectorAll(".acc>button").forEach(b => b.onclick = () => {
+    const a = b.parentNode, k = a.dataset.k, on = !a.classList.contains("open");
+    a.classList.toggle("open", on); b.setAttribute("aria-expanded", on);
+    on ? openAcc.add(k) : openAcc.delete(k);
+  });
   card.classList.add("on");
-  requestAnimationFrame(() => requestAnimationFrame(() => {
+  if(animate) requestAnimationFrame(() => requestAnimationFrame(() => {
     card.querySelectorAll(".fill").forEach(el => el.style.width = el.dataset.w + "%");
     const arc = card.querySelector(".arc"); if(arc) arc.style.strokeDashoffset = C*(1-pct);
   }));
 }
 
-/* ---------- top list ---------- */
+/* ---------- top list (floating) ---------- */
 function renderTop(){
-  const box = $("#top");
+  const box = $("#topList");
   if(!ranks.n){ box.innerHTML = `<div class="empty">${t("noWeights")}</div>`; return; }
   const top = [...ranks].sort((a,b)=>a[1]-b[1]).slice(0,10);
   box.innerHTML = "<ol>" + top.map(([iso,r]) => { const c = byIso.get(iso), s = scores.get(iso);
-    return `<li data-iso="${iso}"><span class="i">${r}</span><span class="nm">${flag(c.iso2)} ${cname(c)}<small data-w="${s}"></small></span><span class="pc">${s}%</span></li>`; }).join("") + "</ol>";
+    return `<li data-iso="${iso}"><span class="i">${r}</span><span class="nm">${flag(c.iso2)} ${esc(cname(c))}<small data-w="${s}" style="background:${colorOf(s)}"></small></span><span class="pc">${s}</span></li>`; }).join("") + "</ol>";
   box.querySelectorAll("li").forEach(li => {
     li.onclick = () => select(li.dataset.iso, true);
     li.onmouseenter = () => svg.selectAll(".country").filter(f => f.iso3 === li.dataset.iso).classed("hov", true);
@@ -673,29 +867,53 @@ function renderTop(){
   requestAnimationFrame(() => requestAnimationFrame(() =>
     box.querySelectorAll("small").forEach(el => el.style.width = el.dataset.w + "%")));
 }
+$("#topH").onclick = () => { const el = $("#top"); el.classList.toggle("col"); save("kp_topcol", el.classList.contains("col")); };
+if(load("kp_topcol", false)) $("#top").classList.add("col");
+
+/* ---------- modal ---------- */
+function openModal(){
+  const rows = ORDER.map(k => {
+    const parts = k === "legal" ? `${t("f").legal[1]} (Passport Index)` :
+      DATA.factors[k].map(([ik,w]) => `${t("ind")[ik]} — ${t("weight")} ${Math.round(w*100)}% <span class="muted">(${SRC[DATA.indicators[ik].src]})</span>`).join("<br>");
+    return `<tr><td>${t("f")[k][0]}</td><td>${parts}</td></tr>`;
+  }).join("");
+  $("#modalBox").innerHTML = `<button class="x" aria-label="Close">×</button>${t("about")}
+    <h3>${t("tableT")}</h3><table>${rows}</table>${t("rules")}`;
+  $("#modalBox .x").onclick = closeModal;
+  $("#modal").classList.add("on");
+}
+function closeModal(){ $("#modal").classList.remove("on"); }
+$("#howBtn").onclick = openModal;
+$("#modal").onclick = e => { if(e.target.id === "modal") closeModal(); };
 
 /* ---------- boot ---------- */
 document.querySelectorAll(".lang button").forEach(b => b.onclick = () => {
   lang = b.dataset.l; save("kp_lang", lang); applyTexts(); renderTop(); drawPins();
   if(selected) renderCard(selected, false);
+  if($("#modal").classList.contains("on")) openModal();
 });
 buildColors();
-applyTexts();
-if(window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { buildColors(); update(false); if(selected) renderCard(selected,false); });
+if(window.matchMedia){ const mq = matchMedia("(prefers-color-scheme: dark)"); mq.addEventListener && mq.addEventListener("change", () => { buildColors(); update(false); }); }
 
 (async function(){
   try{
     const r = await fetch("data/countries.json"); DATA = await r.json();
     DATA.countries.forEach(c => byIso.set(c.iso3, c));
-    $("#gen").textContent = t("generated") + " " + DATA.generated;
-    features = (await loadGeometry()).filter(f => f.iso3 !== "ATA" && f.id !== "010");
+    try{ const rv = await fetch("data/visa.json"); if(rv.ok){ VISA = await rv.json(); VISA.dest.forEach((d,i)=>visaIdx.set(d,i)); } }catch(e){}
+    if(CIT && !(VISA && VISA.p[CIT])) CIT = "";
+    applyTexts();
+    features = prepFeatures(await loadGeometry());
     $("#loading").remove();
     setupMap(); update(false);
-    let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => {
-      const keep = selected; setupMap(); update(false); svg.selectAll(".country").interrupt("intro").style("opacity",1);
+    setTimeout(() => $("#top").classList.add("on"), REDUCED ? 0 : 1200);
+    let rt, lastW = window.innerWidth;
+    window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => {
+      if(Math.abs(window.innerWidth - lastW) < 2 && window.innerWidth <= 980) return; lastW = window.innerWidth;
+      const keep = selected; setupMap(); update(false); svg.selectAll(".country,.disputed").interrupt("intro").style("opacity",1);
       if(keep) select(keep, false); }, 250); });
   }catch(e){
     console.error(e);
+    applyTexts();
     $("#loading").textContent = "Error: " + e.message;
   }
 })();
