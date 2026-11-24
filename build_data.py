@@ -30,7 +30,7 @@ IND = {
     "unemployment": (-1, "ilo"), "vulnerable_employment": (-1, "ilo"), "manpower_neo": (1, "manpower"),
     "rule_of_law_0_100": (1, "wgi"), "control_corruption_0_100": (1, "wgi"),
 }
-# Фактор = взвешенное среднее процентилей его показателей (если есть >= 50% веса).
+# Фактор = взвешенное среднее процентилей его показателей; нет показателя = 0.
 FACTORS = {
     "safety":    [("homicides_100k", .5), ("political_stability_0_100", .5)],
     "cost":      [("price_level_vs_usa", 1.0)],
@@ -40,6 +40,8 @@ FACTORS = {
     "labor":     [("unemployment", .45), ("vulnerable_employment", .30), ("manpower_neo", .25)],
     "laws":      [("rule_of_law_0_100", .5), ("control_corruption_0_100", .5)],
 }
+# Показатели, которых нет у многих стран не из-за слабости, а потому что опрос там не проводят
+OPTIONAL = {"manpower_neo"}
 # Ручные значения из национальных первоисточников (нет во Всемирном банке)
 MANUAL = {
     ("ARG", "inflation"): (31.5, 2025, "indec"),  # INDEC, дек 2025 к дек 2024
@@ -145,11 +147,13 @@ for i, c in countries.items():
         if i in P[k]:
             c["p"][k] = round(P[k][i])
     for f, parts in FACTORS.items():
+        # нет показателя = 0 (пропуски обычно скрывают слабые результаты);
+        # исключение — OPTIONAL: опросы, которые проводятся не во всех странах
+        parts = [(k, w) for k, w in parts if k not in OPTIONAL or i in P[k]]
         total = sum(w for _, w in parts)
         have = [(P[k][i], w) for k, w in parts if i in P[k]]
-        hw = sum(w for _, w in have)
-        if hw >= 0.5 * total:
-            c["f"][f] = round(sum(s * w for s, w in have) / hw)
+        if have:
+            c["f"][f] = round(sum(s * w for s, w in have) / total)
     if not c["src"]:
         del c["src"]
 

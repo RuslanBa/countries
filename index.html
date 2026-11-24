@@ -27,8 +27,8 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
 button,select{font:inherit;color:inherit}
-.wrap{max-width:1600px;margin:0 auto;padding:12px 16px 14px}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.wrap{max-width:1680px;margin:0 auto;padding:10px 16px 8px;height:100vh;min-height:520px;display:flex;flex-direction:column}
+header{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
 .ttl{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;min-width:0}
 h1{font-family:Unbounded,"Golos Text",sans-serif;font-weight:700;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;margin:0;line-height:1.1}
 .sub{color:var(--muted);margin:0;font-size:14px}
@@ -37,19 +37,31 @@ h1{font-family:Unbounded,"Golos Text",sans-serif;font-weight:700;font-size:clamp
 .lang{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
 .lang button{border:0;background:none;padding:5px 11px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted);transition:background .2s,color .2s}
 .lang button.on{background:var(--ink);color:var(--bg)}
-.grid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:14px;align-items:start}
+.grid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:14px;flex:1;min-height:0}
+#side{overflow-y:auto;min-height:0}
+.mapbox{min-height:0}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
 .panel h2{font-family:Unbounded,sans-serif;font-size:13px;font-weight:500;margin:0 0 2px}
 .hint{color:var(--muted);font-size:12px;margin:0 0 8px}
-.presets{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.presets{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:2px;gap:2px}
+.seg button{border:0;background:none;border-radius:8px;padding:5px 4px;font-size:12px;line-height:1.2;cursor:pointer;color:var(--muted);transition:all .2s}
+.seg button.on{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.kids{display:flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer;user-select:none}
+.kids input{appearance:none;-webkit-appearance:none;width:30px;height:17px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;transition:background .2s;margin:0;flex:none}
+.kids input::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .2s}
+.kids input:checked{background:var(--accent)}
+.kids input:checked::after{transform:translateX(13px)}
 .presets button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:3px 9px;font-size:12px;cursor:pointer;transition:all .2s}
 .presets button:hover{border-color:var(--accent);color:var(--accent)}
 .presets button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .f{padding:6px 0 3px;border-top:1px solid var(--line)}
 .f-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
 .f-name{font-weight:600;font-size:13.5px;display:flex;align-items:center;gap:5px}
-.info{width:17px;height:17px;border-radius:50%;border:1px solid var(--line);background:none;font-size:10.5px;line-height:15px;padding:0;cursor:pointer;color:var(--muted);font-weight:700;flex:none}
-.info[aria-expanded=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.info{width:18px;height:18px;border:0;background:none;padding:0;cursor:pointer;color:var(--muted);flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:5px}
+.info:hover{background:var(--line);color:var(--ink)}
+.info svg{width:9px;height:9px;transition:transform .25s}
+.info[aria-expanded=true] svg{transform:rotate(180deg)}
 .f-val{font-variant-numeric:tabular-nums;font-size:11.5px;color:var(--muted);white-space:nowrap}
 .f-val b{color:var(--ink);font-size:13px}
 .f-sub{font-size:11.5px;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .25s ease, margin .25s}
@@ -70,12 +82,15 @@ input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:3
 input[type=range]:disabled{opacity:.4;cursor:not-allowed}
 
 .mapbox{position:relative;background:var(--sea);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-#map{display:block;width:100%;touch-action:none;cursor:grab}
+#map{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 #map:active{cursor:grabbing}
 .grat{fill:none;stroke:var(--grat);stroke-width:.6;vector-effect:non-scaling-stroke}
-.country{stroke:var(--stroke);stroke-width:.7;vector-effect:non-scaling-stroke;cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .28s cubic-bezier(.2,.8,.2,1),filter .28s}
-.country.hov{transform:scale(1.035);filter:drop-shadow(0 4px 6px rgba(0,0,0,.35)) brightness(1.08) saturate(1.1);stroke:var(--ink);stroke-width:1.2}
-.country.sel{stroke:var(--ink);stroke-width:2;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.country{stroke:var(--stroke);stroke-width:.7;vector-effect:non-scaling-stroke;cursor:pointer}
+circle.country{transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.hovp{pointer-events:none;stroke:var(--ink);stroke-width:1.3;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35)) brightness(1.08) saturate(1.1);animation:pop .25s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes pop{from{transform:scale(1)}to{transform:scale(1.035)}}
+.selp{pointer-events:none;stroke:var(--ink);stroke-width:2.2;vector-effect:non-scaling-stroke;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+circle.country.sel{stroke:var(--ink);stroke-width:2.2}
 circle.country{stroke-width:1.3}
 circle.country.hov{transform:scale(1.6)}
 .hit{fill:transparent;cursor:pointer}
@@ -101,15 +116,16 @@ circle.country.hov{transform:scale(1.6)}
 .zoomctl button{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow)}
 
 .float{position:absolute;top:12px;right:12px;width:300px;max-height:calc(100% - 24px);overflow:auto;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);transition:opacity .35s,transform .4s cubic-bezier(.2,.8,.2,1);z-index:5}
-.top{padding:10px 12px;opacity:0;transform:translateY(-10px)}
+.top{padding:9px 12px;opacity:0;transform:translateY(-10px)}
 .top.on{opacity:1;transform:none}
 .top.hide{opacity:0;transform:translateX(20px);pointer-events:none}
-.top-h{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
-.top-h h2{margin:0;font-family:Unbounded,sans-serif;font-size:13px;font-weight:500}
+.top-h{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;min-height:22px}
+.top-h h2{margin:0;line-height:22px;font-family:Unbounded,sans-serif;font-size:13px;font-weight:500}
 .chev{display:inline-block;transition:transform .25s;color:var(--muted);font-size:12px}
 .top.col .chev{transform:rotate(-90deg)}
-.top ol{list-style:none;margin:6px 0 0;padding:0;overflow:hidden;transition:max-height .35s ease;max-height:600px}
-.top.col ol{max-height:0}
+.top ol{list-style:none;margin:6px 0 0;padding:0;overflow:hidden;transition:max-height .35s ease,margin .35s;max-height:600px}
+.top.col ol{max-height:0;margin:0}
+.top.col .empty{display:none}
 .top li{display:grid;grid-template-columns:20px 1fr 30px;align-items:center;gap:6px;padding:4px 5px;border-radius:8px;cursor:pointer;transition:background .2s;font-size:13px}
 .top li:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
 .top .i{font-variant-numeric:tabular-nums;color:var(--muted);font-size:11.5px}
@@ -163,11 +179,14 @@ circle.country.hov{transform:scale(1.6)}
 .modal td:first-child{font-weight:600;white-space:nowrap}
 .modal a{color:var(--accent)}
 .modal .x{position:absolute;top:12px;right:12px;border:0;background:none;font-size:22px;cursor:pointer;color:var(--muted);width:34px;height:34px;border-radius:8px}
-footer{margin-top:8px;font-size:11.5px;color:var(--muted)}
+footer{flex:none;margin-top:6px;font-size:11.5px;color:var(--muted);line-height:1.4}
 footer a{color:var(--muted)}
 .loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
 @media (max-width:980px){
+  .wrap{height:auto;display:block}
   .grid{grid-template-columns:1fr}
+  .mapbox{height:62vw;min-height:280px}
+  #side{overflow:visible}
   .sub{display:none}
   .card{position:fixed;top:auto;bottom:0;left:0;right:0;width:auto;max-height:70vh;border-radius:18px 18px 0 0;transform:translateY(40px)}
   .top{position:static;width:auto;margin:8px;max-height:none}
@@ -207,7 +226,7 @@ footer a{color:var(--muted)}
       <div class="loading" id="loading" data-i="loading"></div>
       <div class="tip" id="tip"></div>
       <div class="float top" id="top">
-        <div class="top-h" id="topH"><h2 data-i="topTitle"></h2><span class="chev">▾</span></div>
+        <div class="top-h" id="topH"><h2 data-i="topTitle"></h2><span class="chev">▼</span></div>
         <div id="topList"></div>
       </div>
       <div class="float card" id="card" aria-live="polite"></div>
@@ -252,7 +271,7 @@ const T = {
  en:{
   title:"Where should I move?", subtitle:"Set what matters to you — the map recolors every country to match.",
   how:"How it works", whatMatters:"What matters to you", sliderHint:"0 — ignore, 5 — very important",
-  presets:{equal:"Balanced",family:"Family with kids",remote:"Remote worker",career:"Career"},
+  presets:{local:"Local job",remote:"Remote, foreign income",kids:"I have children"},
   loading:"Loading map…", legendTitle:"Match with your priorities", legendLow:"weak", legendHigh:"strong",
   noData:"not enough data", disputed:"disputed territory", disputedT:"Disputed territory",
   topTitle:"Best matches",
@@ -261,7 +280,7 @@ const T = {
   better:"better than {n}% of countries",
   noWeights:"Move at least one slider above 0.", notEnough:"Not enough data for your priorities",
   noVal:"no data", sources:"Sources:",
-  footNote:"Prototype v0.2 · values not older than 2021 · not legal or migration advice.", generated:"Data:",
+  footNote:"Prototype v0.3 · values not older than 2021 · not legal or migration advice.", generated:"Data:",
   citizenship:"Your citizenship", choose:"— choose —", needCit:"Choose your citizenship to use this factor",
   entry:"Entry for citizens of {c}", legalSoon:"Coming next: years to permanent residence and citizenship.",
   visaNoData:"Visa data not loaded yet (run extra_data.py).",
@@ -291,7 +310,7 @@ const T = {
    <ul><li>Each factor is built from 1–3 official indicators.</li>
    <li>For every indicator a country gets a percentile 0–100: <b>“better than N% of countries”</b>. It is a position in the world ranking, not a probability.</li>
    <li>The factor is a weighted average of its indicators; the final match is the average of factors weighted by your sliders.</li>
-   <li>If a country lacks data for more than 40% of what matters to you, it turns grey.</li>
+   <li>Missing data counts as 0 (shown as “—”): gaps usually hide weak results, so they do not help a country.</li>
    <li><b>Ease of legal entry</b> depends on your passport: no visa for 90+ days = 100, visa required = 15. Years to residence and citizenship will be added next.</li></ul>`,
   rules:`<h3>Rules</h3><ul>
    <li>Only official sources; values not older than 2021.</li>
@@ -303,7 +322,7 @@ const T = {
  ru:{
   title:"Куда переехать?", subtitle:"Задайте, что для вас важно, — карта перекрасит страны.",
   how:"Как это работает", whatMatters:"Что для вас важно", sliderHint:"0 — не учитывать, 5 — очень важно",
-  presets:{equal:"Поровну",family:"Семья с детьми",remote:"Удалёнщик",career:"Карьера"},
+  presets:{local:"Работа на местном рынке",remote:"Работа на зарубеж",kids:"Есть дети"},
   loading:"Загружаю карту…", legendTitle:"Совпадение с вашими приоритетами", legendLow:"слабое", legendHigh:"сильное",
   noData:"мало данных", disputed:"спорная территория", disputedT:"Спорная территория",
   topTitle:"Лучшие совпадения",
@@ -312,7 +331,7 @@ const T = {
   better:"лучше, чем у {n}% стран",
   noWeights:"Поднимите хотя бы один ползунок выше 0.", notEnough:"Мало данных под ваши приоритеты",
   noVal:"нет данных", sources:"Источники:",
-  footNote:"Прототип v0.2 · значения не старше 2021 года · не является юридической или миграционной консультацией.", generated:"Данные:",
+  footNote:"Прототип v0.3 · значения не старше 2021 года · не является юридической или миграционной консультацией.", generated:"Данные:",
   citizenship:"Ваше гражданство", choose:"— выберите —", needCit:"Укажите гражданство, чтобы учесть этот фактор",
   entry:"Въезд для граждан: {c}", legalSoon:"Дальше добавим: сроки до ВНЖ/ПМЖ и гражданства.",
   visaNoData:"Визовые данные ещё не загружены (запустите extra_data.py).",
@@ -342,7 +361,7 @@ const T = {
    <ul><li>Каждый фактор собран из 1–3 официальных показателей.</li>
    <li>По каждому показателю страна получает процентиль 0–100: <b>«лучше, чем у N% стран»</b>. Это место в мировом рейтинге, а не вероятность.</li>
    <li>Фактор — взвешенное среднее его показателей; итоговое совпадение — среднее факторов с весами ваших ползунков.</li>
-   <li>Если у страны нет данных больше чем по 40% важного для вас, она становится серой.</li>
+   <li>Нет данных — значит 0 (показываем «—»): пропуски обычно скрывают слабые результаты, поэтому они не дают стране преимущества.</li>
    <li><b>Лёгкость легализации</b> зависит от вашего паспорта: без визы на 90+ дней = 100, нужна виза = 15. Сроки до ВНЖ и гражданства добавим следующим шагом.</li></ul>`,
   rules:`<h3>Правила</h3><ul>
    <li>Только официальные источники; значения не старше 2021 года.</li>
@@ -354,7 +373,7 @@ const T = {
  es:{
   title:"¿A dónde mudarme?", subtitle:"Indica qué te importa: el mapa colorea los países según tus prioridades.",
   how:"Cómo funciona", whatMatters:"Qué te importa", sliderHint:"0 — no cuenta, 5 — muy importante",
-  presets:{equal:"Equilibrado",family:"Familia con hijos",remote:"Trabajo remoto",career:"Carrera"},
+  presets:{local:"Trabajo local",remote:"Remoto al exterior",kids:"Tengo hijos"},
   loading:"Cargando el mapa…", legendTitle:"Coincidencia con tus prioridades", legendLow:"baja", legendHigh:"alta",
   noData:"pocos datos", disputed:"territorio en disputa", disputedT:"Territorio en disputa",
   topTitle:"Mejores opciones",
@@ -363,7 +382,7 @@ const T = {
   better:"mejor que el {n}% de los países",
   noWeights:"Sube al menos un control por encima de 0.", notEnough:"Pocos datos para tus prioridades",
   noVal:"sin datos", sources:"Fuentes:",
-  footNote:"Prototipo v0.2 · valores no anteriores a 2021 · no es asesoramiento legal ni migratorio.", generated:"Datos:",
+  footNote:"Prototipo v0.3 · valores no anteriores a 2021 · no es asesoramiento legal ni migratorio.", generated:"Datos:",
   citizenship:"Tu ciudadanía", choose:"— elige —", needCit:"Elige tu ciudadanía para usar este factor",
   entry:"Ingreso para ciudadanos de {c}", legalSoon:"Próximamente: años hasta la residencia y la ciudadanía.",
   visaNoData:"Los datos de visas aún no están cargados (ejecuta extra_data.py).",
@@ -393,7 +412,7 @@ const T = {
    <ul><li>Cada factor se arma con 1–3 indicadores oficiales.</li>
    <li>En cada indicador el país recibe un percentil 0–100: <b>«mejor que el N% de los países»</b>. Es una posición en el ranking mundial, no una probabilidad.</li>
    <li>El factor es el promedio ponderado de sus indicadores; la coincidencia final es el promedio de factores con los pesos de tus controles.</li>
-   <li>Si a un país le faltan datos de más del 40% de lo que te importa, queda en gris.</li>
+   <li>La falta de datos cuenta como 0 (se muestra «—»): los huecos suelen ocultar resultados débiles, así que no favorecen al país.</li>
    <li><b>Facilidad para radicarse</b> depende de tu pasaporte: sin visa por 90+ días = 100, con visa = 15. Luego sumaremos los años hasta la residencia y la ciudadanía.</li></ul>`,
   rules:`<h3>Reglas</h3><ul>
    <li>Solo fuentes oficiales; valores no anteriores a 2021.</li>
@@ -405,12 +424,18 @@ const T = {
 };
 const SRC = {wb:"World Bank WDI", wgi:"World Bank WGI", who:"WHO / World Bank", ilo:"ILO / World Bank", pisa:"OECD PISA 2025", indec:"INDEC", manpower:"ManpowerGroup MEOS"};
 const VISA_SCORE = [0,15,40,65,55,70,85,100,100];
-const PRESETS = {
-  equal: {legal:3,safety:3,cost:3,education:3,health:3,economy:3,labor:3,laws:3},
-  family:{legal:4,safety:5,cost:2,education:5,health:4,economy:3,labor:2,laws:3},
-  remote:{legal:5,safety:4,cost:5,education:0,health:3,economy:2,labor:0,laws:3},
-  career:{legal:4,safety:3,cost:1,education:1,health:2,economy:4,labor:5,laws:3}
+// Base 3 everywhere; work mode and "kids" adjust it.
+const BASE = {legal:3,safety:3,cost:3,education:2,health:3,economy:3,labor:3,laws:3};
+const MODE = {
+  local: {legal:5,labor:5,economy:4,cost:2},
+  remote:{legal:4,labor:0,economy:2,cost:5,safety:4}
 };
+const KIDS = {education:5,safety:5,health:4};
+function presetWeights(mode, kids){
+  const w = Object.assign({}, BASE, MODE[mode] || {});
+  if(kids) Object.keys(KIDS).forEach(k => w[k] = Math.max(w[k], KIDS[k]));
+  return w;
+}
 // Disputed territories. Feature-level: matched by ISO3 or name. Area-level: drawn on top (approximate outlines).
 const DISPUTED_FEATURES = {
   XKX:{ru:"Косово",en:"Kosovo",es:"Kosovo"},
@@ -436,10 +461,11 @@ function load(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.par
 function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 const navLang = (navigator.language||"en").slice(0,2);
 let lang = load("kp_lang", T[navLang] ? navLang : "en");
-let W = Object.assign({}, PRESETS.equal, load("kp_w2", {}));
+let MODE_SEL = load("kp_mode", ""), KIDS_SEL = load("kp_kids", false);
+let W = Object.assign({}, BASE, load("kp_w3", {}));
 let CIT = load("kp_cit", "");
 let DATA, VISA = null, visaIdx = new Map(), byIso = new Map(), scores = new Map(), ranks = new Map(), selected = null;
-let features = [], dots = [], areas = [], svg, root, gMap, gDots, gPins, gFx, path, projection, zoom, width = 1000, height = 520;
+let features = [], dots = [], areas = [], svg, root, gMap, gDots, gSel, gHover, gPins, gFx, path, projection, zoom, width = 1000, height = 520;
 let openAcc = new Set();
 
 /* ---------- helpers ---------- */
@@ -486,7 +512,8 @@ function compute(){
   DATA.countries.forEach(c => {
     let s=0, w=0;
     ORDER.forEach(k => { const wk=activeW(k); const f=factor(c,k); if(wk>0 && f!=null){ s+=wk*f; w+=wk; } });
-    scores.set(c.iso3, (w/total >= 0.6) ? Math.round(s/w) : null);
+    // missing factor = 0: divide by the full weight, not by the available one
+    scores.set(c.iso3, w > 0 ? Math.round(s/total) : null);
   });
   const sorted = [...scores].filter(d=>d[1]!=null).sort((a,b)=>b[1]-a[1]);
   sorted.forEach((d,i)=>ranks.set(d[0], i+1));
@@ -503,18 +530,20 @@ function applyTexts(){
   buildPresets(); buildSliders();
 }
 function buildPresets(){
-  const box = $("#presets"); box.innerHTML = "";
-  Object.keys(PRESETS).forEach(p => {
-    const b = document.createElement("button");
-    b.textContent = t("presets")[p];
-    b.onclick = () => { W = Object.assign({}, PRESETS[p]); save("kp_w2", W); buildSliders(); markPresets(); update(true); };
-    box.appendChild(b);
+  const p = t("presets");
+  $("#presets").innerHTML = `<div class="seg" role="radiogroup">
+      <button data-m="local" role="radio">${p.local}</button><button data-m="remote" role="radio">${p.remote}</button></div>
+    <label class="kids"><input type="checkbox" id="kidsChk"${KIDS_SEL?" checked":""}> ${p.kids}</label>`;
+  $("#presets").querySelectorAll(".seg button").forEach(b => {
+    b.classList.toggle("on", b.dataset.m === MODE_SEL); b.setAttribute("aria-checked", b.dataset.m === MODE_SEL);
+    b.onclick = () => { MODE_SEL = MODE_SEL === b.dataset.m ? "" : b.dataset.m; applyPreset(); };
   });
-  markPresets();
+  $("#kidsChk").onchange = e => { KIDS_SEL = e.target.checked; applyPreset(); };
 }
-function markPresets(){
-  const btns = $("#presets").querySelectorAll("button");
-  Object.keys(PRESETS).forEach((p,i)=> btns[i] && btns[i].classList.toggle("on", ORDER.every(k => PRESETS[p][k] === +W[k])));
+function applyPreset(){
+  W = presetWeights(MODE_SEL, KIDS_SEL);
+  save("kp_mode", MODE_SEL); save("kp_kids", KIDS_SEL); save("kp_w3", W);
+  buildPresets(); buildSliders(); update(true);
 }
 function citizenshipOptions(){
   if(!VISA) return "";
@@ -532,7 +561,7 @@ function buildSliders(){
     const na = k === "legal" && !legalOn();
     d.className = "f" + (+W[k]===0?" off":"") + (na?" na":"");
     d.innerHTML = `<div class="f-top"><span class="f-name"><label for="s_${k}">${name}</label>
-        <button class="info" aria-expanded="false" aria-label="?">i</button></span>
+        <button class="info" aria-expanded="false" aria-label="?"><svg viewBox="0 0 10 10"><path d="M5 2 9 8H1z" fill="currentColor"/></svg></button></span>
         <span class="f-val"><b>${W[k]}</b> / 5</span></div>
       <div class="f-sub">${sub}${k==="legal" && !VISA ? ". " + t("visaNoData") : ""}</div>
       ${k==="legal" ? `<div class="cit${VISA && !CIT ? " need":""}"><span>${t("citizenship")}</span><select id="cit" ${VISA?"":"disabled"}>${citizenshipOptions()}</select></div>` : ""}
@@ -542,7 +571,7 @@ function buildSliders(){
       W[k] = +inp.value; inp.style.setProperty("--p", W[k]*20+"%");
       d.querySelector(".f-val b").textContent = W[k]; d.classList.toggle("off", W[k]===0);
       inp.setAttribute("aria-valuetext", W[k]+" / 5");
-      save("kp_w2", W); markPresets(); update(true);
+      save("kp_w3", W); update(true);
     });
     const ib = d.querySelector(".info"), sb = d.querySelector(".f-sub");
     ib.onclick = () => { const on = !sb.classList.contains("on"); sb.classList.toggle("on", on); ib.setAttribute("aria-expanded", on); };
@@ -590,18 +619,11 @@ function setupMap(){
   svg = d3.select("#map");
   const box = $("#mapbox");
   width = Math.max(320, box.clientWidth);
-  const wide = window.innerWidth > 980;
-  const avail = wide ? Math.max(360, window.innerHeight - box.getBoundingClientRect().top - window.scrollY - 40) : 9999;
+  height = Math.max(260, box.clientHeight);
   const land = {type:"FeatureCollection", features};
-  projection = d3.geoNaturalEarth1();
-  projection.fitWidth(width - 16, land);
-  let b = d3.geoPath(projection).bounds(land);
-  let h = b[1][1] - b[0][1];
-  height = Math.round(Math.min(h + 16, Math.max(avail, 300)));
-  projection.fitExtent([[8,8],[width-8,height-8]], land);
+  projection = d3.geoNaturalEarth1().fitExtent([[10,10],[width-10,height-10]], land);
   path = d3.geoPath(projection);
-  svg.attr("viewBox", `0 0 ${width} ${height}`).attr("height", height);
-  if(wide) $("#side").style.maxHeight = (height + 2) + "px";
+  svg.attr("viewBox", `0 0 ${width} ${height}`);
   svg.selectAll("*").remove();
 
   root = svg.append("g");
@@ -631,12 +653,14 @@ function setupMap(){
     .on("pointermove", (ev,d) => showTip(ev,d))
     .on("pointerleave", function(){ d3.select(this.parentNode).select(".country").classed("hov",false); hideTip(); })
     .on("click", onClick);
+  gSel = root.append("g"); gHover = root.append("g");
   gPins = root.append("g");
   gFx = svg.append("g");
 
   zoom = d3.zoom().scaleExtent([1, 12])
     .translateExtent([[-width*0.15, -height*0.12],[width*1.15, height*1.12]])
     .filter(ev => ev.type !== "wheel" && !ev.ctrlKey && !ev.button)
+    .on("start", () => clearHover())
     .on("zoom", ev => {
       root.attr("transform", ev.transform);
       const s = 1/ev.transform.k;
@@ -646,6 +670,7 @@ function setupMap(){
     });
   svg.call(zoom).on("dblclick.zoom", null);
   svg.node().addEventListener("wheel", onWheel, {passive:false});
+  svg.on("pointerleave.clear", () => { clearHover(); hideTip(); });
   svg.on("click.bg", ev => { if(ev.target === svg.node() || ev.target.classList.contains("grat")) closeCard(); });
 
   // intro: countries appear in a west→east wave
@@ -681,7 +706,7 @@ function update(animate){
   gDots.selectAll("circle.country").transition("fill").duration(dur)
     .delay(d => dur ? (d.xy[0]/width)*260 : 0)
     .attr("fill", d => colorOf(scores.get(d.iso3)));
-  drawPins(); renderTop();
+  drawPins(); renderTop(); drawSel();
   if(selected) renderCard(selected, false);
 }
 
@@ -714,13 +739,19 @@ function drawPins(){
 
 /* ---------- interactions ---------- */
 const tip = $("#tip");
-function onEnter(ev, d){
-  const el = d3.select(this); el.classed("hov", true);
-  if(this.tagName === "path"){ el.raise(); gMap.selectAll("path.country.sel").raise(); gMap.selectAll("path.disputed").raise(); }
-  showTip(ev, d);
+function showHover(d){
+  gHover.selectAll("path").data([d]).join("path").attr("class","hovp").attr("d", path(d)).attr("fill", colorOf(scores.get(d.iso3)));
 }
+function clearHover(){ if(gHover) gHover.selectAll("*").remove(); svg && svg.selectAll("circle.country.hov").classed("hov", false); }
+function onEnter(ev, d){ showHover(d); showTip(ev, d); }
 function onMove(ev, d){ showTip(ev, d); }
-function onLeave(){ d3.select(this).classed("hov", false); hideTip(); }
+function onLeave(){ clearHover(); hideTip(); }
+function drawSel(){
+  const f = selected && featureOf(selected);
+  gSel.selectAll("path").data(f ? [f] : []).join("path").attr("class","selp").attr("d", d => path(d))
+    .attr("fill", d => colorOf(scores.get(d.iso3)));
+  gDots.selectAll("circle.country").classed("sel", d => d.iso3 === selected);
+}
 function hideTip(){ tip.classList.remove("on"); }
 function showTip(ev, d, isDisputed){
   if(isDisputed){
@@ -757,8 +788,7 @@ function onClick(ev, d){
 }
 function select(iso, zoomTo){
   selected = iso;
-  svg.selectAll(".country").classed("sel", f => f.iso3 === iso);
-  gMap.selectAll("path.country.sel").raise(); gMap.selectAll("path.disputed").raise();
+  drawSel();
   const f = featureOf(iso), dt = dots.find(x => x.iso3 === iso);
   if(zoomTo && f) zoomToFeature(f);
   else if(zoomTo && dt) zoomToPoint(dt.xy, 5);
@@ -779,7 +809,7 @@ function zoomToFeature(f){
 }
 function closeCard(){
   selected = null; $("#card").classList.remove("on"); $("#top").classList.remove("hide");
-  svg.selectAll(".country").classed("sel", false);
+  if(gSel) drawSel();
 }
 $("#zin").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1.6);
 $("#zout").onclick = () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.6);
@@ -861,8 +891,8 @@ function renderTop(){
     return `<li data-iso="${iso}"><span class="i">${r}</span><span class="nm">${flag(c.iso2)} ${esc(cname(c))}<small data-w="${s}" style="background:${colorOf(s)}"></small></span><span class="pc">${s}</span></li>`; }).join("") + "</ol>";
   box.querySelectorAll("li").forEach(li => {
     li.onclick = () => select(li.dataset.iso, true);
-    li.onmouseenter = () => svg.selectAll(".country").filter(f => f.iso3 === li.dataset.iso).classed("hov", true);
-    li.onmouseleave = () => svg.selectAll(".country.hov").classed("hov", false);
+    li.onmouseenter = () => { const f = featureOf(li.dataset.iso); if(f) showHover(f); else gDots.selectAll("circle.country").filter(d => d.iso3 === li.dataset.iso).classed("hov", true); };
+    li.onmouseleave = clearHover;
   });
   requestAnimationFrame(() => requestAnimationFrame(() =>
     box.querySelectorAll("small").forEach(el => el.style.width = el.dataset.w + "%")));
