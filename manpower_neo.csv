@@ -1,14 +1,43 @@
 iso3,country,neo,quarter,year,note
-IND,India,54,Q4 2026,2026,press release 2026-09-08
-BRA,Brazil,53,Q4 2026,2026,press release 2026-09-08
-PAN,Panama,49,Q4 2026,2026,press release 2026-09-08
-MEX,Mexico,41,Q4 2026,2026,press release 2026-09-08
-ARE,United Arab Emirates,41,Q4 2026,2026,press release 2026-09-08
-SWE,Sweden,39,Q4 2026,2026,press release 2026-09-08
-USA,United States,36,Q4 2026,2026,press release 2026-09-08
-VNM,Vietnam,36,Q4 2026,2026,press release 2026-09-08
-CHN,China,34,Q4 2026,2026,press release 2026-09-08
-ISR,Israel,34,Q4 2026,2026,press release 2026-09-08
-GBR,United Kingdom,23,Q4 2026,2026,press release 2026-09-08
-DEU,Germany,15,Q4 2026,2026,press release 2026-09-08
-FRA,France,13,Q4 2026,2026,press release 2026-09-08
+IND,India,54,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+BRA,Brazil,53,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+PAN,Panama,49,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+MEX,Mexico,41,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+ARE,United Arab Emirates,41,Q4 2026,2026,unadjusted (not seasonally adjusted)
+PER,Peru,40,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+SWE,Sweden,39,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+CRI,Costa Rica,38,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+GTM,Guatemala,38,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+USA,United States,36,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+VNM,Vietnam,36,Q4 2026,2026,unadjusted (not seasonally adjusted)
+COL,Colombia,35,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+CHN,China,34,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+ISR,Israel,34,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+PRI,Puerto Rico,34,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+NLD,Netherlands,33,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+PRT,Portugal,32,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+IRL,Ireland,31,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+AUS,Australia,27,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+NOR,Norway,26,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+TWN,Taiwan,26,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+CZE,Czechia,25,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+TUR,Turkiye,25,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+HUN,Hungary,24,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+GBR,United Kingdom,23,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+CHE,Switzerland,21,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+CAN,Canada,19,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+POL,Poland,18,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+ESP,Spain,18,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+ARG,Argentina,16,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+BEL,Belgium,16,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+ITA,Italy,16,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+CHL,Chile,15,Q4 2026,2026,unadjusted (not seasonally adjusted)
+DEU,Germany,15,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+GRC,Greece,15,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+HKG,Hong Kong,14,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+FRA,France,13,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+SGP,Singapore,13,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+FIN,Finland,11,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+JPN,Japan,7,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+ROU,Romania,4,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"
+SVK,Slovakia,3,Q4 2026,2026,"ManpowerGroup MEOS Q4 2026 Global Report, p.9"

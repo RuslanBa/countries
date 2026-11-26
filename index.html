@@ -279,7 +279,7 @@ const T = {
   better:"better than {n}% of countries",
   noWeights:"Move at least one slider above 0.", notEnough:"Not enough data for your priorities",
   noVal:"no data", sources:"Sources:",
-  footNote:"Prototype v0.3 · values not older than 2021 · not legal or migration advice.", generated:"Data:",
+  footNote:"Prototype v0.4 · values not older than 2021 · not legal or migration advice.", generated:"Data:",
   citizenship:"Your citizenship", choose:"— choose —", needCit:"Choose your citizenship to use this factor",
   entry:"Entry for citizens of {c}", legalSoon:"Coming next: years to permanent residence and citizenship.",
   visaNoData:"Visa data not loaded yet (run extra_data.py).",
@@ -315,7 +315,7 @@ const T = {
    <li>Only official sources; values not older than 2021.</li>
    <li>Exchange rates are not used — there is no reliable source to keep them current.</li>
    <li>Disputed territories are shown in white and are not assigned to any country.</li>
-   <li>Dependent territories and micro-states (under 250k people) are not ranked.</li></ul>`,
+   <li>All countries and territories with data are on the map, including small ones (shown as dots).</li></ul>`,
   tableT:"What is inside each factor", weight:"weight"
  },
  ru:{
@@ -330,7 +330,7 @@ const T = {
   better:"лучше, чем у {n}% стран",
   noWeights:"Поднимите хотя бы один ползунок выше 0.", notEnough:"Мало данных под ваши приоритеты",
   noVal:"нет данных", sources:"Источники:",
-  footNote:"Прототип v0.3 · значения не старше 2021 года · не является юридической или миграционной консультацией.", generated:"Данные:",
+  footNote:"Прототип v0.4 · значения не старше 2021 года · не является юридической или миграционной консультацией.", generated:"Данные:",
   citizenship:"Ваше гражданство", choose:"— выберите —", needCit:"Укажите гражданство, чтобы учесть этот фактор",
   entry:"Въезд для граждан: {c}", legalSoon:"Дальше добавим: сроки до ВНЖ/ПМЖ и гражданства.",
   visaNoData:"Визовые данные ещё не загружены (запустите extra_data.py).",
@@ -366,7 +366,7 @@ const T = {
    <li>Только официальные источники; значения не старше 2021 года.</li>
    <li>Курсы валют не используем — нет надёжного источника, чтобы держать их актуальными.</li>
    <li>Спорные территории показаны белым и не относятся ни к одной стране.</li>
-   <li>Зависимые территории и микрогосударства (меньше 250 тыс. жителей) в рейтинг не входят.</li></ul>`,
+   <li>На карте все страны и территории, по которым есть данные, включая маленькие (показаны точками).</li></ul>`,
   tableT:"Из чего состоит каждый фактор", weight:"вес"
  },
  es:{
@@ -381,7 +381,7 @@ const T = {
   better:"mejor que el {n}% de los países",
   noWeights:"Sube al menos un control por encima de 0.", notEnough:"Pocos datos para tus prioridades",
   noVal:"sin datos", sources:"Fuentes:",
-  footNote:"Prototipo v0.3 · valores no anteriores a 2021 · no es asesoramiento legal ni migratorio.", generated:"Datos:",
+  footNote:"Prototipo v0.4 · valores no anteriores a 2021 · no es asesoramiento legal ni migratorio.", generated:"Datos:",
   citizenship:"Tu ciudadanía", choose:"— elige —", needCit:"Elige tu ciudadanía para usar este factor",
   entry:"Ingreso para ciudadanos de {c}", legalSoon:"Próximamente: años hasta la residencia y la ciudadanía.",
   visaNoData:"Los datos de visas aún no están cargados (ejecuta extra_data.py).",
@@ -417,7 +417,7 @@ const T = {
    <li>Solo fuentes oficiales; valores no anteriores a 2021.</li>
    <li>No usamos tipos de cambio: no hay una fuente confiable para mantenerlos al día.</li>
    <li>Los territorios en disputa se muestran en blanco y no se asignan a ningún país.</li>
-   <li>Los territorios dependientes y los microestados (menos de 250 mil hab.) no entran en el ranking.</li></ul>`,
+   <li>En el mapa están todos los países y territorios con datos, también los pequeños (se muestran como puntos).</li></ul>`,
   tableT:"Qué incluye cada factor", weight:"peso"
  }
 };
@@ -447,9 +447,14 @@ const DISPUTED_AREAS = [
   {n:{ru:"Абьей",en:"Abyei",es:"Abyei"}, c:[[27.75,9.25],[28.95,9.3],[29.05,9.95],[28.3,10.25],[27.8,10.05],[27.75,9.25]]}
 ];
 // Dependent territories drawn as part of their sovereign state
-const PARENT = {GRL:"DNK", PRI:"USA", NCL:"FRA", ATF:"FRA"};
+const PARENT = {ATF:"FRA"}; // uninhabited French Southern Lands
 // small countries missing from the 110m map: drawn as dots [lon, lat]
-const DOTS = {BHR:[50.58,26.07],BRB:[-59.6,13.1],CPV:[-23.6,15.1],COM:[43.3,-11.7],HKG:[114.17,22.32],MAC:[113.55,22.2],
+const DOTS = {AND:[1.52,42.51],SMR:[12.45,43.94],MCO:[7.42,43.74],LIE:[9.55,47.16],IMN:[-4.55,54.23],GIB:[-5.35,36.14],
+ FRO:[-6.9,62],BMU:[-64.75,32.3],CYM:[-81.25,19.3],VGB:[-64.62,18.42],VIR:[-64.9,18.34],TCA:[-71.8,21.8],MAF:[-63.08,18.07],
+ SXM:[-63.05,18.04],CUW:[-68.99,12.17],ABW:[-69.97,12.52],ATG:[-61.85,17.12],DMA:[-61.37,15.41],GRD:[-61.68,12.12],KNA:[-62.72,17.3],
+ VCT:[-61.2,13.25],ASM:[-170.7,-14.3],GUM:[144.79,13.44],MNP:[145.7,15.2],PYF:[-149.5,-17.6],KIR:[173,1.42],MHL:[171.4,7.1],
+ FSM:[158.2,6.9],NRU:[166.93,-0.53],PLW:[134.58,7.5],TUV:[179.2,-8.5],TON:[-175.2,-21.2],SYC:[55.45,-4.62],PRI:[-66.5,18.2],
+ BHR:[50.58,26.07],BRB:[-59.6,13.1],CPV:[-23.6,15.1],COM:[43.3,-11.7],HKG:[114.17,22.32],MAC:[113.55,22.2],
  MDV:[73.5,4.18],MLT:[14.5,35.9],MUS:[57.55,-20.25],SGP:[103.82,1.35],LUX:[6.13,49.61],CYP:[33.4,35.1],QAT:[51.2,25.3],
  BRN:[114.9,4.9],TTO:[-61.3,10.5],BHS:[-77.4,25.0],PSE:[35.2,31.9],TLS:[125.7,-8.8],ISL:[-19,64.9],MNE:[19.3,42.7],
  WSM:[-171.8,-13.8],STP:[6.6,0.25],LCA:[-60.98,13.91],SLB:[160,-9.4],VUT:[167.7,-15.4],FJI:[178,-17.8],BLZ:[-88.5,17.2],
