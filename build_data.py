@@ -5,7 +5,6 @@
   countries.csv        — результат countries_data.py (Всемирный банк)       обязательно
   pisa_2025.csv        — PISA 2025 (OECD)                                    обязательно
   iso_codes.csv        — коды стран ISO 3166 (лежит рядом)                    обязательно
-  extra.csv            — население (extra_data.py)                           желательно
   visa_tidy_iso3.csv   — визовые режимы (extra_data.py)                      желательно
   manpower_neo.csv     — ManpowerGroup Net Employment Outlook (вручную)      по желанию
 
@@ -17,7 +16,6 @@ import os
 import time
 
 MIN_YEAR = 2021
-MIN_POPULATION = 250_000          # меньше — микрогосударство, в рейтинг не берём
 MANPOWER_MIN_COUNTRIES = 35       # опрос Manpower используем, только если внесены почти все ~42 страны
 
 # Показатель: (направление: +1 больше = лучше, -1 меньше = лучше), источник
@@ -37,23 +35,21 @@ FACTORS = {
     "education": [("pisa", .7), ("tertiary_enrollment", .3)],
     "health":    [("life_expectancy", .4), ("uhc_index", .3), ("infant_mortality", .3)],
     "economy":   [("gdp_pc_ppp", .5), ("gdp_growth", .2), ("inflation", .3)],
-    "labor":     [("unemployment", .45), ("vulnerable_employment", .30), ("manpower_neo", .25)],
+    "labor":     [("unemployment", .55), ("vulnerable_employment", .35), ("manpower_neo", .10)],
     "laws":      [("rule_of_law_0_100", .5), ("control_corruption_0_100", .5)],
 }
 # Показатели, которых нет у многих стран не из-за слабости, а потому что опрос там не проводят
-OPTIONAL = {"manpower_neo"}
+OPTIONAL = set()  # было {"manpower_neo"}; решили: нет опроса = 0, как у всех показателей
 # Ручные значения из национальных первоисточников (нет во Всемирном банке)
 MANUAL = {
     ("ARG", "inflation"): (31.5, 2025, "indec"),  # INDEC, дек 2025 к дек 2024
 }
-# Не самостоятельные государства — в рейтинг не берём
-NON_SOVEREIGN = {"CHI", "IMN", "GIB", "FRO", "BMU", "CYM", "VGB", "VIR", "ASM", "GUM", "MNP", "PYF",
-                 "TCA", "MAF", "SXM", "CUW", "ABW", "PRI", "GRL", "NCL"}
-# Спорные территории — на карте белые, в рейтинг не берём
+# Не показываем отдельно: Нормандские острова — часть Великобритании (у ВБ это сумма Джерси и Гернси)
+SKIP = {"CHI"}
+# Спорные территории — на карте серые, в рейтинг не берём
 DISPUTED = {"XKX", "ESH"}
-# Запасной список микрогосударств, если нет extra.csv
-MICRO_FALLBACK = {"AND", "SMR", "MCO", "LIE", "NRU", "TUV", "PLW", "MHL", "KNA", "DMA", "ATG", "GRD",
-                  "VCT", "LCA", "KIR", "TON", "FSM", "SYC", "STP", "WSM"}
+# Страны, которых нет во Всемирном банке, но есть в других источниках
+EXTRA_COUNTRIES = {"TWN": "Taiwan"}
 
 
 def read_csv(name):
@@ -68,20 +64,8 @@ num_to_a3 = {r["numeric"]: r["alpha3"] for r in iso if r["numeric"]}
 rows = read_csv("countries.csv")
 pisa = {r["iso3"]: r for r in read_csv("pisa_2025.csv")}
 
-population = {}
-if os.path.exists("extra.csv"):
-    population = {r["iso3"]: int(r["population"]) for r in read_csv("extra.csv") if r["population"]}
-    print("население:", len(population), "стран")
-else:
-    print("extra.csv нет — микрогосударства убираю по запасному списку")
-
-
 def excluded(iso3):
-    if iso3 in NON_SOVEREIGN or iso3 in DISPUTED:
-        return True
-    if population:
-        return population.get(iso3, 10**9) < MIN_POPULATION
-    return iso3 in MICRO_FALLBACK
+    return iso3 in SKIP or iso3 in DISPUTED
 
 
 countries = {}
@@ -103,6 +87,16 @@ for r in rows:
         c["v"]["pisa"] = [round(sum(vals) / len(vals)), 2025]
         c["pisa3"] = [int(p["pisa_math"] or 0), int(p["pisa_reading"] or 0), int(p["pisa_science"] or 0)]
     countries[r["iso3"]] = c
+
+for iso3, name in EXTRA_COUNTRIES.items():
+    if iso3 not in countries:
+        c = {"iso3": iso3, "iso2": a3_to_a2.get(iso3), "name": name, "v": {}, "src": {}}
+        p = pisa.get(iso3)
+        if p and p["pisa_math"] and "только часть" not in p["note"]:
+            vals = [float(p[x]) for x in ("pisa_math", "pisa_reading", "pisa_science") if p[x]]
+            c["v"]["pisa"] = [round(sum(vals) / len(vals)), 2025]
+            c["pisa3"] = [int(p["pisa_math"] or 0), int(p["pisa_reading"] or 0), int(p["pisa_science"] or 0)]
+        countries[iso3] = c
 
 for (iso3, key), (val, yr, src) in MANUAL.items():
     if iso3 in countries:
@@ -194,6 +188,12 @@ if os.path.exists("visa_tidy_iso3.csv"):
         for row in rd:
             if len(row) >= 3:
                 pairs[(row[0], row[1])] = code(row[2])
+    # Территории, где действуют иммиграционные правила метрополии, — копируем её режим
+    VISA_PARENT = {"PRI": "USA", "GUM": "USA", "VIR": "USA", "MNP": "USA", "IMN": "GBR"}
+    for (p_, d_), v_ in list(pairs.items()):
+        for terr, par in VISA_PARENT.items():
+            if d_ == par:
+                pairs[(p_, terr)] = v_
     dests = sorted({d for _, d in pairs})
     passports = sorted({p for p, _ in pairs})
     src_info = open("visa_source.txt", encoding="utf-8").read().split("\n") if os.path.exists("visa_source.txt") else ["", ""]
