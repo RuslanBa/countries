@@ -7,6 +7,7 @@
   iso_codes.csv        — коды стран ISO 3166 (лежит рядом)                    обязательно
   visa_tidy_iso3.csv   — визовые режимы (extra_data.py)                      желательно
   manpower_neo.csv     — ManpowerGroup Net Employment Outlook (вручную)      по желанию
+  un_migrants.csv      — UN DESA, уроженцы страны X в стране Y (un_desa.py)  желательно
 
 Запуск:  python3 build_data.py
 """
@@ -166,6 +167,27 @@ with open("data/countries.json", "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
 print("стран в рейтинге:", len(countries), "| исключено:", len(dropped))
 print("покрытие факторов:", {f: sum(1 for c in countries.values() if f in c["f"]) for f in FACTORS})
+
+# ---------- соотечественники (UN DESA) -> data/diaspora.json ----------
+# Сколько уроженцев страны X живёт в стране Y (абсолютное число, оба пола).
+# Процентиль считается на странице под выбранное гражданство. Нет пары в данных ООН = «—».
+if os.path.exists("un_migrants.csv"):
+    dia, dia_year = {}, None
+    for r in read_csv("un_migrants.csv"):
+        o, d = r["origin_iso3"], r["dest_iso3"]
+        if o == d or excluded(d) or d not in countries:
+            continue
+        v = int(float(r["migrants"]))
+        if v > 0:
+            dia.setdefault(o, {})[d] = v
+            dia_year = int(r["year"])
+    with open("data/diaspora.json", "w", encoding="utf-8") as f:
+        json.dump({"year": dia_year, "src": "UN DESA International Migrant Stock", "o": dia},
+                  f, separators=(",", ":"))
+    print("соотечественники:", len(dia), "стран рождения,", sum(len(x) for x in dia.values()),
+          "пар -> data/diaspora.json")
+else:
+    print("un_migrants.csv нет — показатель «соотечественники» будет без данных (запусти un_desa.py)")
 
 # ---------- визы -> data/visa.json ----------
 # Коды: 0 въезд запрещён, 1 нужна виза, 2 e-visa, 3 eTA, 4 виза по прилёту,

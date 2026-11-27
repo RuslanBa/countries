@@ -250,6 +250,7 @@ footer a{color:var(--muted)}
     <a href="https://www.oecd.org/en/about/programmes/pisa.html" target="_blank" rel="noopener">OECD PISA 2025</a> ·
     <a href="https://www.indec.gob.ar" target="_blank" rel="noopener">INDEC</a> ·
     <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank" rel="noopener">Passport Index dataset</a> ·
+    <a href="https://www.un.org/development/desa/pd/content/international-migrant-stock" target="_blank" rel="noopener">UN DESA International Migrant Stock 2024</a> ·
     <a href="https://github.com/topojson/world-atlas" target="_blank" rel="noopener">Natural Earth</a>.
     <span data-i="footNote"></span> <span id="gen"></span>
   </footer>
@@ -282,10 +283,12 @@ const T = {
   footNote:"Prototype v0.4 · values not older than 2021 · not legal or migration advice.", generated:"Data:",
   citizenship:"Your citizenship", choose:"— choose —", needCit:"Choose your citizenship to use this factor",
   entry:"Entry for citizens of {c}", legalSoon:"Coming next: years to permanent residence and citizenship.",
+  diaspora:"People born in {c} living here",
+  legalParts:"Visa regime for your passport — weight 90% <span class=\"muted\">(Passport Index)</span><br>People born in your country living there — weight 10% <span class=\"muted\">(UN DESA, 2024)</span>",
   visaNoData:"Visa data not loaded yet (run extra_data.py).",
   visa:["entry not allowed","visa required","e-visa","electronic travel authorization (eTA)","visa on arrival","visa-free, under 30 days","visa-free, 30–89 days","visa-free, 90+ days","your own country"],
   f:{
-   legal:["Ease of legal entry","visa regime for your passport"],
+   legal:["Ease of legal entry","visa regime, people from your country already there"],
    safety:["Safety","homicides, political stability"],
    cost:["Low cost of living","price level vs. USA"],
    education:["Education quality","PISA 2025, university enrolment"],
@@ -310,7 +313,7 @@ const T = {
    <li>For every indicator a country gets a percentile 0–100: <b>“better than N% of countries”</b>. It is a position in the world ranking, not a probability.</li>
    <li>The factor is a weighted average of its indicators; the final match is the average of factors weighted by your sliders.</li>
    <li>Missing data counts as 0 (shown as “—”): gaps usually hide weak results, so they do not help a country.</li>
-   <li><b>Ease of legal entry</b> depends on your passport: no visa for 90+ days = 100, visa required = 15. Years to residence and citizenship will be added next.</li></ul>`,
+   <li><b>Ease of legal entry</b> depends on your passport: no visa for 90+ days = 100, visa required = 15. The number of people born in your country who already live there adds 10% (UN DESA, 2024 — the only global source; no data shown as “—”). Years to residence and citizenship will be added next.</li></ul>`,
   rules:`<h3>Rules</h3><ul>
    <li>Only official sources; values not older than 2021.</li>
    <li>Exchange rates are not used — there is no reliable source to keep them current.</li>
@@ -333,10 +336,12 @@ const T = {
   footNote:"Прототип v0.4 · значения не старше 2021 года · не является юридической или миграционной консультацией.", generated:"Данные:",
   citizenship:"Ваше гражданство", choose:"— выберите —", needCit:"Укажите гражданство, чтобы учесть этот фактор",
   entry:"Въезд для граждан: {c}", legalSoon:"Дальше добавим: сроки до ВНЖ/ПМЖ и гражданства.",
+  diaspora:"Соотечественники здесь (уроженцы: {c})",
+  legalParts:"Визовый режим для вашего паспорта — вес 90% <span class=\"muted\">(Passport Index)</span><br>Уроженцы вашей страны, живущие там, — вес 10% <span class=\"muted\">(UN DESA, 2024)</span>",
   visaNoData:"Визовые данные ещё не загружены (запустите extra_data.py).",
   visa:["въезд запрещён","нужна виза","электронная виза","электронное разрешение (eTA)","виза по прилёту","без визы, меньше 30 дней","без визы, 30–89 дней","без визы, 90+ дней","ваша страна"],
   f:{
-   legal:["Лёгкость легализации","визовый режим для вашего паспорта"],
+   legal:["Лёгкость легализации","визовый режим, соотечественники в стране"],
    safety:["Безопасность","убийства, политическая стабильность"],
    cost:["Дешевизна жизни","уровень цен относительно США"],
    education:["Качество образования","PISA 2025, охват вузами"],
@@ -361,7 +366,7 @@ const T = {
    <li>По каждому показателю страна получает процентиль 0–100: <b>«лучше, чем у N% стран»</b>. Это место в мировом рейтинге, а не вероятность.</li>
    <li>Фактор — взвешенное среднее его показателей; итоговое совпадение — среднее факторов с весами ваших ползунков.</li>
    <li>Нет данных — значит 0 (показываем «—»): пропуски обычно скрывают слабые результаты, поэтому они не дают стране преимущества.</li>
-   <li><b>Лёгкость легализации</b> зависит от вашего паспорта: без визы на 90+ дней = 100, нужна виза = 15. Сроки до ВНЖ и гражданства добавим следующим шагом.</li></ul>`,
+   <li><b>Лёгкость легализации</b> зависит от вашего паспорта: без визы на 90+ дней = 100, нужна виза = 15. Ещё 10% — сколько уроженцев вашей страны уже живёт там (UN DESA, 2024 — единственный глобальный источник; нет данных — «—»). Сроки до ВНЖ и гражданства добавим следующим шагом.</li></ul>`,
   rules:`<h3>Правила</h3><ul>
    <li>Только официальные источники; значения не старше 2021 года.</li>
    <li>Курсы валют не используем — нет надёжного источника, чтобы держать их актуальными.</li>
@@ -384,10 +389,12 @@ const T = {
   footNote:"Prototipo v0.4 · valores no anteriores a 2021 · no es asesoramiento legal ni migratorio.", generated:"Datos:",
   citizenship:"Tu ciudadanía", choose:"— elige —", needCit:"Elige tu ciudadanía para usar este factor",
   entry:"Ingreso para ciudadanos de {c}", legalSoon:"Próximamente: años hasta la residencia y la ciudadanía.",
+  diaspora:"Nacidos en {c} que viven aquí",
+  legalParts:"Régimen de visas para tu pasaporte — peso 90% <span class=\"muted\">(Passport Index)</span><br>Nacidos en tu país que ya viven allí — peso 10% <span class=\"muted\">(UN DESA, 2024)</span>",
   visaNoData:"Los datos de visas aún no están cargados (ejecuta extra_data.py).",
   visa:["ingreso no permitido","se requiere visa","visa electrónica","autorización electrónica (eTA)","visa a la llegada","sin visa, menos de 30 días","sin visa, 30–89 días","sin visa, 90+ días","tu propio país"],
   f:{
-   legal:["Facilidad para radicarse","régimen de visas para tu pasaporte"],
+   legal:["Facilidad para radicarse","régimen de visas, compatriotas en el país"],
    safety:["Seguridad","homicidios, estabilidad política"],
    cost:["Costo de vida bajo","nivel de precios vs. EE. UU."],
    education:["Calidad educativa","PISA 2025, matrícula universitaria"],
@@ -412,7 +419,7 @@ const T = {
    <li>En cada indicador el país recibe un percentil 0–100: <b>«mejor que el N% de los países»</b>. Es una posición en el ranking mundial, no una probabilidad.</li>
    <li>El factor es el promedio ponderado de sus indicadores; la coincidencia final es el promedio de factores con los pesos de tus controles.</li>
    <li>La falta de datos cuenta como 0 (se muestra «—»): los huecos suelen ocultar resultados débiles, así que no favorecen al país.</li>
-   <li><b>Facilidad para radicarse</b> depende de tu pasaporte: sin visa por 90+ días = 100, con visa = 15. Luego sumaremos los años hasta la residencia y la ciudadanía.</li></ul>`,
+   <li><b>Facilidad para radicarse</b> depende de tu pasaporte: sin visa por 90+ días = 100, con visa = 15. Otro 10%: cuántas personas nacidas en tu país ya viven allí (UN DESA, 2024 — la única fuente global; sin datos = «—»). Luego sumaremos los años hasta la residencia y la ciudadanía.</li></ul>`,
   rules:`<h3>Reglas</h3><ul>
    <li>Solo fuentes oficiales; valores no anteriores a 2021.</li>
    <li>No usamos tipos de cambio: no hay una fuente confiable para mantenerlos al día.</li>
@@ -423,6 +430,8 @@ const T = {
 };
 const SRC = {wb:"World Bank WDI", wgi:"World Bank WGI", who:"WHO / World Bank", ilo:"ILO / World Bank", pisa:"OECD PISA 2025", indec:"INDEC", manpower:"ManpowerGroup MEOS"};
 const VISA_SCORE = [0,15,40,65,55,70,85,100,100];
+// "Ease of legal entry": visa regime + people born in your country living there (UN DESA)
+const LEGAL_W = {visa:0.9, dia:0.1};
 // Base 3 everywhere; work mode and "kids" adjust it.
 const BASE = {legal:3,safety:3,cost:3,education:2,health:3,economy:3,labor:3,laws:3};
 const MODE = {
@@ -468,7 +477,7 @@ let lang = load("kp_lang", T[navLang] ? navLang : "en");
 let MODE_SEL = load("kp_mode", ""), KIDS_SEL = load("kp_kids", false);
 let W = Object.assign({}, BASE, load("kp_w3", {}));
 let CIT = load("kp_cit", "");
-let DATA, VISA = null, visaIdx = new Map(), byIso = new Map(), scores = new Map(), ranks = new Map(), selected = null;
+let DATA, VISA = null, DIA = null, diaCache = {cit:null, p:{}}, visaIdx = new Map(), byIso = new Map(), scores = new Map(), ranks = new Map(), selected = null;
 let features = [], dots = [], areas = [], svg, root, gMap, gDots, gSel, gHover, gPins, gFx, path, projection, zoom, width = 1000, height = 520;
 let openAcc = new Set();
 
@@ -504,8 +513,26 @@ function visaCode(dest){
   const i = visaIdx.get(dest); if(i == null) return null;
   const ch = VISA.p[CIT][i]; return ch === "-" ? null : +ch;
 }
+// people born in CIT living in dest: percentile among destinations with data; no pair = null ("—")
+const diaOn = () => !!(DIA && CIT && DIA.o[CIT]);
+function diaPct(dest){
+  if(!diaOn()) return null;
+  if(diaCache.cit !== CIT){
+    const items = Object.entries(DIA.o[CIT]).filter(([d]) => byIso.has(d));
+    const vals = items.map(e => e[1]).sort((a,b) => a-b), n = vals.length, p = {};
+    items.forEach(([d,v]) => { let below=0, eq=0; for(const x of vals){ if(x<v) below++; else if(x===v) eq++; }
+      p[d] = Math.round((below + 0.5*eq) / n * 100); });
+    diaCache = {cit:CIT, p};
+  }
+  return diaCache.p[dest] ?? null;
+}
 function factor(c, k){
-  if(k === "legal"){ const v = visaCode(c.iso3); return v == null ? null : VISA_SCORE[v]; }
+  if(k === "legal"){
+    const v = visaCode(c.iso3); if(v == null) return null;
+    if(!diaOn()) return VISA_SCORE[v];
+    const dp = v === 8 ? 100 : (diaPct(c.iso3) ?? 0);   // own country = 100; no data = 0 (shown as "—")
+    return Math.round(LEGAL_W.visa*VISA_SCORE[v] + LEGAL_W.dia*dp);
+  }
   return c.f ? (c.f[k] ?? null) : null;
 }
 function activeW(k){ return (k === "legal" && !legalOn()) ? 0 : (+W[k] || 0); }
@@ -829,6 +856,12 @@ function fmtInd(key, v){
   if(["homicides_100k","gdp_growth","inflation","unemployment","vulnerable_employment","infant_mortality"].includes(key)) return nf(v,1);
   return nf(v,0);
 }
+function diaLine(c, code, citName){
+  if(!DIA || code === 8) return "";
+  const m = DIA.o[CIT], v = m ? m[c.iso3] : null, p = diaPct(c.iso3);
+  return `<div class="ind${v==null?" miss":""}"><span>${t("diaspora").replace("{c}", esc(citName))}</span><span class="v">${v==null?"—":nf(v,0)}</span>
+      <span class="meta">${p!=null ? `<em>${t("better").replace("{n}", p)}</em> · ` : (v==null ? t("noVal") + " · " : "")}${t("year")} ${DIA.year} · UN DESA</span></div>`;
+}
 function factorBody(c, k){
   if(k === "legal"){
     if(!VISA) return `<div class="note">${t("visaNoData")}</div>`;
@@ -837,6 +870,7 @@ function factorBody(c, k){
     const citName = citC ? cname(citC) : CIT;
     return `<div class="ind"><span>${t("entry").replace("{c}", esc(citName))}</span><span class="v">${code==null?t("noVal"):esc(t("visa")[code])}</span>
       <span class="meta">Passport Index dataset${VISA.date ? " · " + VISA.date : ""}</span></div>
+      ${diaLine(c, code, citName)}
       <div class="note">${t("legalSoon")}</div>`;
   }
   return DATA.factors[k].map(([ik]) => {
@@ -908,7 +942,7 @@ if(load("kp_topcol", false)) $("#top").classList.add("col");
 /* ---------- modal ---------- */
 function openModal(){
   const rows = ORDER.map(k => {
-    const parts = k === "legal" ? `${t("f").legal[1]} (Passport Index)` :
+    const parts = k === "legal" ? t("legalParts") :
       DATA.factors[k].map(([ik,w]) => `${t("ind")[ik]} — ${t("weight")} ${Math.round(w*100)}% <span class="muted">(${SRC[DATA.indicators[ik].src]})</span>`).join("<br>");
     return `<tr><td>${t("f")[k][0]}</td><td>${parts}</td></tr>`;
   }).join("");
@@ -935,6 +969,7 @@ if(window.matchMedia){ const mq = matchMedia("(prefers-color-scheme: dark)"); mq
     const r = await fetch("data/countries.json"); DATA = await r.json();
     DATA.countries.forEach(c => byIso.set(c.iso3, c));
     try{ const rv = await fetch("data/visa.json"); if(rv.ok){ VISA = await rv.json(); VISA.dest.forEach((d,i)=>visaIdx.set(d,i)); } }catch(e){}
+    try{ const rd = await fetch("data/diaspora.json"); if(rd.ok) DIA = await rd.json(); }catch(e){}
     if(CIT && !(VISA && VISA.p[CIT])) CIT = "";
     applyTexts();
     features = prepFeatures(await loadGeometry());
